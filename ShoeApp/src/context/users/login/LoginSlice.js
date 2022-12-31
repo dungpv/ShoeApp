@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {KEY_SCREENS, KEY_STORAGE} from '../../common/Constant';
-import {saveStorage} from '../../common/LocalStorage';
+import {KEY_SCREENS, KEY_STORAGE} from '../../../common/Constant';
+import {saveStorage} from '../../../common/LocalStorage';
 import {login} from './LoginThunk';
 
 const initialState = {

@@ -9,7 +9,7 @@ import {
 import React, {Component} from 'react';
 import {Formik} from 'formik';
 import {useDispatch} from 'react-redux';
-import {login} from '../../context/login/LoginThunk';
+import {login} from '../../context/users/LoginThunk';
 import * as Yup from 'yup';
 import {getLocalStorageByKey} from '../../common/LocalStorage';
 import {KEY_SCREENS, KEY_STORAGE} from '../../common/Constant';

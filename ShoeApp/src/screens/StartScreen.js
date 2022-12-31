@@ -1,8 +1,8 @@
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {theme} from '../../common/Theme';
-import styles from './styles/styles';
-import {IMAGES} from '../../common/Constant';
+import {theme} from '../common/Theme';
+import styles from './users/styles/styles';
+import {IMAGES} from '../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 
 export default function StartScreen() {

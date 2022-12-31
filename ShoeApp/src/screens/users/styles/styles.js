@@ -20,7 +20,7 @@ export default styles = StyleSheet.create({
     height: 110,
     marginBottom: 8,
   },
-  app_header: {
+  app__header: {
     fontSize: 22,
     color: theme.colors.primary,
     fontWeight: 'bold',
@@ -110,5 +110,8 @@ export default styles = StyleSheet.create({
   containerInput__input__textInput: {
     flex: 1,
     padding: 8,
+  },
+  error: {
+    color: 'red',
   },
 });

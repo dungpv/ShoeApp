@@ -24,3 +24,5 @@ export const ICONS = {
 export const IMAGES = {
   logo: require('../assets/running-shoe-96.png'),
 };
+
+export const API_URL = 'https://shop.cyberlearn.vn/api/';
