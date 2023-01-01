@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 import React from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
@@ -14,17 +7,11 @@ import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
-import {login} from '../../context/users/login/LoginThunk';
+import {changePassword} from '../../context/users/changepassword/ChangePasswordThunk';
 
-export default function LoginTemp() {
+export default function ChangePassword() {
   const navigation = useNavigation();
   const validSchema = Yup.object().shape({
-    email: Yup.string()
-      .required('Vui lòng nhập email')
-      .matches(
-        /^([\w.-]+)@(\[(\d{1,3}\.){3}|(?!yahoo\.mail)(([a-zA-Z\d-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$/,
-        'Sai định dạng và không dùng yahoo.mail',
-      ),
     password: Yup.string()
       .required('Vui lòng nhập mật khẩu')
       .matches(
@@ -35,26 +22,22 @@ export default function LoginTemp() {
 
   const dispatch = useDispatch();
 
-  const signIn = async data => {
-    dispatch(login(data)).then(navigation.push('ProductsScreen'));
-    // const token = await getLocalStorageByKey(KEY_STORAGE.token);
-    // console.log(`Token ${token}`);
+  const changePass = data => {
+    dispatch(changePassword(data));
+    setTimeout(() => navigation.navigate('ProductsScreen'), 1000);
   };
 
   return (
     <Formik
       initialValues={{
-        email: '',
         password: '',
       }}
       validationSchema={validSchema}
       onSubmit={values => {
-        {
-          signIn(values);
-        }
+        changePass(values);
       }}>
       {({errors, handleSubmit, handleChange, touched}) => {
-        // console.log(errors);
+        //console.log(errors);
         return (
           <View style={styles.container}>
             <TouchableOpacity
@@ -65,31 +48,14 @@ export default function LoginTemp() {
             <Image source={IMAGES.logo} style={styles.logo__image}></Image>
             <Text style={styles.app__header}>Shoes App</Text>
             <Text style={styles.app__slogan__text}>Amazing Application</Text>
-            <View style={styles.containerInput}>
-              <Text>Email</Text>
-              <View style={styles.containerInput__input}>
-                <Image
-                  style={styles.containerInput__input__img}
-                  source={ICONS.iconEmail}
-                />
-                <TextInput
-                  style={styles.containerInput__input__textInput}
-                  onChangeText={handleChange('email')}
-                />
-              </View>
-            </View>
 
             <View style={styles.containerInput}>
               <Text>Password</Text>
-              {/* Row */}
               <View style={styles.containerInput__input}>
-                <Image
-                  style={styles.containerInput__input__img}
-                  source={ICONS.iconPassword}
-                />
                 <TextInput
                   secureTextEntry={true}
                   style={styles.containerInput__input__textInput}
+                  placeholder="Password"
                   onChangeText={handleChange('password')}
                 />
               </View>
@@ -98,32 +64,17 @@ export default function LoginTemp() {
               style={{
                 marginTop: 10,
               }}>
-              {errors.email && touched.email && (
-                <Text style={styles.errorText}>{errors.email}</Text>
-              )}
               {errors.password && touched.password && (
                 <Text style={styles.errorText}>{errors.password}</Text>
               )}
             </View>
-            <View style={styles.forgotPassword}>
-              <TouchableOpacity>
-                <Text style={styles.forgot}>Forgot your password?</Text>
-              </TouchableOpacity>
-            </View>
             <TouchableOpacity
-              onPress={handleSubmit}
-              style={[styles.button, {backgroundColor: theme.colors.primary}]}>
+              style={[styles.button, {backgroundColor: theme.colors.primary}]}
+              onPress={handleSubmit}>
               <Text style={[styles.button__text, styles.button__text_white]}>
-                LOGIN
+                Change Password
               </Text>
             </TouchableOpacity>
-            <View style={styles.row}>
-              <Text>Don’t have an account? </Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('RegisterScreen')}>
-                <Text style={styles.link}>Sign up</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         );
       }}

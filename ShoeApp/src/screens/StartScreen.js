@@ -1,9 +1,17 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {theme} from '../common/Theme';
 import styles from './users/styles/styles';
 import {IMAGES} from '../common/Constant';
 import {useNavigation} from '@react-navigation/native';
+import {getLocalStorageByKey} from '../common/LocalStorage';
 
 export default function StartScreen() {
   const navigation = useNavigation();

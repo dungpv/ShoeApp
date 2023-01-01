@@ -1,18 +1,22 @@
 import {View, Text} from 'react-native';
-import React from 'react';
-import Login from './src/screens/users/Login';
+import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {store} from './src/context/store';
 import StartScreen from './src/screens/StartScreen';
-import LoginTemp from './src/screens/users/LoginTemp';
+import Login from './src/screens/users/Login';
 import SignUp from './src/screens/users/SignUp';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Products from './src/screens/products/Products';
+import EditProfile from './src/screens/users/EditProfile';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -22,8 +26,9 @@ export default function App() {
             headerShown: false,
           }}>
           <Stack.Screen name="StartScreen" component={StartScreen} />
-          <Stack.Screen name="LoginScreen" component={LoginTemp} />
+          <Stack.Screen name="LoginScreen" component={Login} />
           <Stack.Screen name="RegisterScreen" component={SignUp} />
+          <Stack.Screen name="EditProfileScreen" component={EditProfile} />
           <Stack.Screen name="ProductsScreen" component={Products} />
         </Stack.Navigator>
       </NavigationContainer>

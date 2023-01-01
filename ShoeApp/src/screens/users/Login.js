@@ -1,186 +1,132 @@
 import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
   View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  TextInput,
 } from 'react-native';
-import React, {Component} from 'react';
-import {Formik} from 'formik';
-import {useDispatch} from 'react-redux';
-import {login} from '../../context/users/LoginThunk';
-import * as Yup from 'yup';
-import {getLocalStorageByKey} from '../../common/LocalStorage';
-import {KEY_SCREENS, KEY_STORAGE} from '../../common/Constant';
+import React from 'react';
+import {theme} from '../../common/Theme';
+import styles from './styles/styles';
+import {ICONS, IMAGES} from '../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
+import * as Yup from 'yup';
+import {useDispatch} from 'react-redux';
+import {Formik} from 'formik';
+import {login} from '../../context/users/login/LoginThunk';
 
 export default function Login() {
   const navigation = useNavigation();
   const validSchema = Yup.object().shape({
-    email: Yup.string().required('Please Enter your email'),
-    password: Yup.string().required('Please Enter your password'),
-    // .matches(
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    //   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
-    // ),
+    email: Yup.string()
+      .required('Vui lòng nhập email')
+      .matches(
+        /^([\w.-]+)@(\[(\d{1,3}\.){3}|(?!yahoo\.mail)(([a-zA-Z\d-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$/,
+        'Sai định dạng và không dùng yahoo.mail',
+      ),
+    password: Yup.string()
+      .required('Vui lòng nhập mật khẩu')
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        'Phải bao gồm chữ hoa, thường, ký tự đặc biệt, và 8 ký tự',
+      ),
   });
 
   const dispatch = useDispatch();
-  //const navigation = useNavigation();
 
   const signIn = async data => {
-    //dispatch(login(data)).then(navigation.push(KEY_SCREENS.profile));
+    dispatch(login(data)).then(navigation.push('ProductsScreen'));
     // const token = await getLocalStorageByKey(KEY_STORAGE.token);
     // console.log(`Token ${token}`);
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.header__title}>Register Now</Text>
-      </View>
-      {/* End Header */}
-
-      {/* Body */}
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        validationSchema={validSchema}
-        onSubmit={values => {
-          {
-            signIn(values);
-          }
-        }}>
-        {({errors, handleSubmit, handleChange}) => {
-          console.log(errors);
-          return (
-            <View style={styles.body}>
-              <View>
-                {/* Column */}
-                <View style={styles.containerInput}>
-                  <Text>Email</Text>
-                  {/* Row */}
-                  <View style={styles.containerInput__input}>
-                    <Image
-                      style={styles.containerInput__input__img}
-                      source={require('../../assets/email.png')}
-                    />
-                    <TextInput
-                      style={styles.containerInput__input__textInput}
-                      onChangeText={handleChange('email')}
-                    />
-                  </View>
-                </View>
-
-                <View style={styles.containerInput}>
-                  <Text>Password</Text>
-                  {/* Row */}
-                  <View style={styles.containerInput__input}>
-                    <Image
-                      style={styles.containerInput__input__img}
-                      source={require('../../assets/password.png')}
-                    />
-                    <TextInput
-                      secureTextEntry={true}
-                      style={styles.containerInput__input__textInput}
-                      onChangeText={handleChange('password')}
-                    />
-                  </View>
-                </View>
-              </View>
-
-              <TouchableOpacity
-                style={[styles.btn, styles.btn_primary]}
-                onPress={handleSubmit}>
-                <Text style={[styles.btn__text, styles.btn__text_white]}>
-                  SIGN IN
-                </Text>
-              </TouchableOpacity>
-
-              <View style={[styles.btn, styles.btn_secondary]}>
-                <Text style={[styles.btn__text, styles.btn__text_green]}>
-                  SIGN UP
-                </Text>
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      validationSchema={validSchema}
+      onSubmit={values => {
+        {
+          signIn(values);
+        }
+      }}>
+      {({errors, handleSubmit, handleChange, touched}) => {
+        // console.log(errors);
+        return (
+          <View style={styles.container}>
+            <TouchableOpacity
+              onPress={navigation.goBack}
+              style={styles.container__button_back}>
+              <Image style={styles.image__back} source={ICONS.iconBack} />
+            </TouchableOpacity>
+            <Image source={IMAGES.logo} style={styles.logo__image}></Image>
+            <Text style={styles.app__header}>Shoes App</Text>
+            <Text style={styles.app__slogan__text}>Amazing Application</Text>
+            <View style={styles.containerInput}>
+              <Text>Email</Text>
+              <View style={styles.containerInput__input}>
+                <Image
+                  style={styles.containerInput__input__img}
+                  source={ICONS.iconEmail}
+                />
+                <TextInput
+                  style={styles.containerInput__input__textInput}
+                  onChangeText={handleChange('email')}
+                />
               </View>
             </View>
-          );
-        }}
-      </Formik>
-      {/* End Body  */}
-    </View>
+
+            <View style={styles.containerInput}>
+              <Text>Password</Text>
+              {/* Row */}
+              <View style={styles.containerInput__input}>
+                <Image
+                  style={styles.containerInput__input__img}
+                  source={ICONS.iconPassword}
+                />
+                <TextInput
+                  secureTextEntry={true}
+                  style={styles.containerInput__input__textInput}
+                  onChangeText={handleChange('password')}
+                />
+              </View>
+            </View>
+            <View
+              style={{
+                marginTop: 10,
+              }}>
+              {errors.email && touched.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
+              {errors.password && touched.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+              )}
+            </View>
+            <View style={styles.forgotPassword}>
+              <TouchableOpacity>
+                <Text style={styles.forgot}>Forgot your password?</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              onPress={handleSubmit}
+              style={[styles.button, {backgroundColor: theme.colors.primary}]}>
+              <Text style={[styles.button__text, styles.button__text_white]}>
+                LOGIN
+              </Text>
+            </TouchableOpacity>
+            <View style={styles.row}>
+              <Text>Don’t have an account? </Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('RegisterScreen')}>
+                <Text style={styles.link}>Sign up</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        );
+      }}
+    </Formik>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#009387',
-  },
-  header: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingLeft: 30,
-    paddingBottom: 30,
-  },
-  header__title: {
-    color: 'white', //Màu
-    fontSize: 30, //Kích thước
-    fontWeight: '500', //Đậm, nhạt
-  },
-  body: {
-    flex: 3,
-    backgroundColor: 'white', //Màu background
-    borderTopLeftRadius: 30, //Bo góc trái
-    borderTopRightRadius: 30, //Bo góc phải
-    padding: 30,
-  },
-  containerInput: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCC',
-    marginTop: 16,
-  },
-  containerInput__input: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  containerInput__input__img: {
-    width: 24,
-    height: 24,
-  },
-  containerInput__input__textInput: {
-    flex: 1,
-    padding: 8,
-  },
-
-  btn: {
-    height: 42,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    marginTop: 18,
-  },
-  btn_primary: {
-    backgroundColor: '#009387',
-  },
-  btn_secondary: {
-    borderColor: '#009387',
-    borderWidth: 1,
-  },
-
-  btn__text: {
-    fontSize: 16,
-  },
-
-  btn__text_white: {
-    color: 'white',
-  },
-
-  btn__text_green: {
-    color: '#009387',
-  },
-});
