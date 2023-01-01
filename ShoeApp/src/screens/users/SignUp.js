@@ -33,8 +33,8 @@ export default function SignUp() {
       ),
     phone: Yup.string()
       .required('Vui lòng nhập số điện thoại')
-      .min(10, 'SĐT phải là 10 số')
-      .max(10, 'SĐT phải là 10 số'),
+      .min(10, 'Số điện thoại phải là 10 số')
+      .max(10, 'Số điện thoại là 10 số'),
   });
 
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ export default function SignUp() {
       onSubmit={values => {
         Register(values);
       }}>
-      {({errors, handleSubmit, handleChange, setFieldValue}) => {
+      {({errors, handleSubmit, handleChange, setFieldValue, touched}) => {
         //console.log(errors);
         return (
           <View style={styles.container}>
@@ -68,7 +68,7 @@ export default function SignUp() {
             </TouchableOpacity>
             <Image source={IMAGES.logo} style={styles.logo__image}></Image>
             <Text style={styles.app__header}>Shoes App</Text>
-            <Text style={styles.app__text}>Amazing Application</Text>
+            <Text style={styles.app__slogan__text}>Amazing Application</Text>
             <View style={styles.containerInput}>
               <Text>Name</Text>
               <View style={styles.containerInput__input}>
@@ -77,11 +77,6 @@ export default function SignUp() {
                   placeholder="Name"
                   onChangeText={handleChange('name')}
                 />
-                {errors.name ? (
-                  <Text style={styles.error}>{errors.name}</Text>
-                ) : (
-                  ''
-                )}
               </View>
             </View>
             <View
@@ -118,11 +113,6 @@ export default function SignUp() {
                   placeholder="Phone"
                   onChangeText={handleChange('phone')}
                 />
-                {errors.phone ? (
-                  <Text style={styles.error}>{errors.phone}</Text>
-                ) : (
-                  ''
-                )}
               </View>
             </View>
             <View style={styles.containerInput}>
@@ -133,11 +123,6 @@ export default function SignUp() {
                   placeholder="example@gmail.com"
                   onChangeText={handleChange('email')}
                 />
-                {errors.email ? (
-                  <Text style={styles.error}>{errors.email}</Text>
-                ) : (
-                  ''
-                )}
               </View>
             </View>
 
@@ -150,14 +135,25 @@ export default function SignUp() {
                   placeholder="Password"
                   onChangeText={handleChange('password')}
                 />
-                {errors.password ? (
-                  <Text style={styles.error}>{errors.password}</Text>
-                ) : (
-                  ''
-                )}
               </View>
             </View>
-
+            <View
+              style={{
+                marginTop: 10,
+              }}>
+              {errors.name && touched.name && (
+                <Text style={styles.errorText}>{errors.name}</Text>
+              )}
+              {errors.phone && touched.phone && (
+                <Text style={styles.errorText}>{errors.phone}</Text>
+              )}
+              {errors.email && touched.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
+              {errors.password && touched.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+              )}
+            </View>
             <TouchableOpacity
               style={[styles.button, {backgroundColor: theme.colors.primary}]}
               onPress={handleSubmit}>

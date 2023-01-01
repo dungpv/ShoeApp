@@ -32,6 +32,7 @@ export default styles = StyleSheet.create({
     lineHeight: 21,
     textAlign: 'center',
     marginBottom: 12,
+    fontWeight: 'bold',
   },
   button: {
     width: '100%',
@@ -111,7 +112,8 @@ export default styles = StyleSheet.create({
     flex: 1,
     padding: 8,
   },
-  error: {
+  errorText: {
     color: 'red',
+    fontSize: 12,
   },
 });

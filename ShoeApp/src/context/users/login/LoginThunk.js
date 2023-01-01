@@ -1,7 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {API_URL} from '../../../common/Constant';
 
 export const login = createAsyncThunk('login/signin', async params => {
-  let resp = await fetch('https://shop.cyberlearn.vn/api/Users/signin', {
+  let resp = await fetch(API_URL + 'Users/signin', {
     method: 'post',
     headers: {
       'content-type': 'application/json',
@@ -14,5 +15,6 @@ export const login = createAsyncThunk('login/signin', async params => {
 
   let json = await resp.json();
   let token = json.content.accessToken;
+  console.log(token);
   return json.content.accessToken;
 });

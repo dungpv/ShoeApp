@@ -11,8 +11,8 @@ export default function StartScreen() {
     <View style={styles.background}>
       <View style={styles.container}>
         <Image source={IMAGES.logo} style={styles.logo__image}></Image>
-        <Text style={styles.app_header}>Shoes App</Text>
-        <Text style={styles.app_slogan__text}>Amazing Application</Text>
+        <Text style={styles.app__header}>Shoes App</Text>
+        <Text style={styles.app__slogan__text}>Amazing Application</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate('LoginScreen')}
           style={[styles.button, {backgroundColor: theme.colors.primary}]}>

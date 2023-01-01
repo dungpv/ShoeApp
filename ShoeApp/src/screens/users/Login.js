@@ -16,6 +16,7 @@ import {KEY_SCREENS, KEY_STORAGE} from '../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 
 export default function Login() {
+  const navigation = useNavigation();
   const validSchema = Yup.object().shape({
     email: Yup.string().required('Please Enter your email'),
     password: Yup.string().required('Please Enter your password'),

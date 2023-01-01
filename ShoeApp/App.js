@@ -8,6 +8,7 @@ import LoginTemp from './src/screens/users/LoginTemp';
 import SignUp from './src/screens/users/SignUp';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
+import Products from './src/screens/products/Products';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginScreen" component={LoginTemp} />
           <Stack.Screen name="RegisterScreen" component={SignUp} />
+          <Stack.Screen name="ProductsScreen" component={Products} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
