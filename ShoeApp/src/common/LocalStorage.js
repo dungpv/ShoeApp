@@ -15,7 +15,7 @@ export const storage = new Storage({
   defaultExpires: ExpiredTime,
 
   // cache data in the memory. default is true.
-  enableCache: false,
+  enableCache: true,
 });
 
 export const saveStorage = (keyName, data) => {
@@ -36,4 +36,13 @@ export const getLocalStorageByKey = async keyName => {
   } catch (error) {
     return '';
   }
+};
+
+export const removeLocalStorageByKey = async keyName => {
+  try {
+    await AsyncStorage.removeItem(keyName);
+  } catch (error) {
+    return '';
+  }
+  console.log('done');
 };

@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native';
-import React, {useEffect} from 'react';
-import {Provider} from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {Provider, useDispatch} from 'react-redux';
 import {store} from './src/context/store';
 import StartScreen from './src/screens/StartScreen';
 import Login from './src/screens/users/Login';
@@ -9,14 +9,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Products from './src/screens/products/Products';
 import EditProfile from './src/screens/users/EditProfile';
-import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
   return (
     <Provider store={store}>
       <NavigationContainer>
