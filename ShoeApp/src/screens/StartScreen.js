@@ -35,6 +35,10 @@ export default function StartScreen() {
       setTimeout(() => {
         navigation.navigate('ProductsScreen');
       }, 2000);
+    } else {
+      setTimeout(() => {
+        navigation.navigate('LoginScreen');
+      }, 2000);
     }
   };
 
