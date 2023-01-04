@@ -20,6 +20,9 @@ export const ICONS = {
   iconEmail: require('../assets/email.png'),
   iconPassword: require('../assets/password.png'),
   iconShoppingCart: require('../assets/shopping_cart.png'),
+  iconLike: require('../assets/like.png'),
+  iconUnlike: require('../assets/unlike.png'),
+  iconLove: require('../assets/love.png'),
 };
 
 export const IMAGES = {
