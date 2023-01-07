@@ -3,7 +3,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import ProductList from './ProductList';
-import ProductDetail from './ProductDetail';
+import ProductDetail from './ProductDetail/ProductDetail';
 import EditProfile from '../users/EditProfile';
 import Header from '../../components/Header';
 

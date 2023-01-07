@@ -23,6 +23,8 @@ export const ICONS = {
   iconLike: require('../assets/like.png'),
   iconUnlike: require('../assets/unlike.png'),
   iconLove: require('../assets/love.png'),
+  iconMore: require('../assets/iconMore.png'),
+  iconColor: require('../assets/iconColor.png'),
 };
 
 export const IMAGES = {

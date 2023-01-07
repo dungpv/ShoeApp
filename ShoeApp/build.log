@@ -1,0 +1,35 @@
+info Found Xcode project "ShoeApp.xcodeproj"
+info Building (using "xcodebuild -project ShoeApp.xcodeproj -configuration Debug -scheme ShoeApp -destination id=2848845A-FC9D-4F74-9DD9-29302388D2C0")
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project ShoeApp.xcodeproj -configuration Debug -scheme ShoeApp -destination id=2848845A-FC9D-4F74-9DD9-29302388D2C0
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+note: Using new build system
+note: Planning
+Analyze workspace
+
+Create build description
+Build description signature: 15e7a3991d6d61d8cc798be8da7ea95d
+Build description path: /Users/crystalhanguyen/Library/Developer/Xcode/DerivedData/ShoeApp-asccsnufvatcjkhdvyjrbhsitzjp/Build/Intermediates.noindex/XCBuildData/15e7a3991d6d61d8cc798be8da7ea95d-desc.xcbuild
+
+note: Build preparation complete
+/Users/crystalhanguyen/Documents/ReactNativeCourse/RnProjects/ShoeApp/ShoeApp/ios/Pods/Target Support Files/Pods-ShoeApp/Pods-ShoeApp.debug.xcconfig:1:1: error: unable to open file (in target "ShoeApp" in project "ShoeApp")
+/Users/crystalhanguyen/Documents/ReactNativeCourse/RnProjects/ShoeApp/ShoeApp/ios/Pods/Target Support Files/Pods-ShoeApp/Pods-ShoeApp.debug.xcconfig:1:1: error: unable to open file (in target "ShoeApp" in project "ShoeApp")
+/Users/crystalhanguyen/Documents/ReactNativeCourse/RnProjects/ShoeApp/ShoeApp/ios/Pods/Target Support Files/Pods-ShoeApp/Pods-ShoeApp.debug.xcconfig:1:1: error: unable to open file (in target "ShoeApp" in project "ShoeApp")
+/Users/crystalhanguyen/Documents/ReactNativeCourse/RnProjects/ShoeApp/ShoeApp/ios/Pods/Target Support Files/Pods-ShoeApp/Pods-ShoeApp.debug.xcconfig:1:1: error: unable to open file (in target "ShoeApp" in project "ShoeApp")
+note: Building targets in dependency order
+error: Unable to load contents of file list: '/Target Support Files/Pods-ShoeApp/Pods-ShoeApp-frameworks-Debug-input-files.xcfilelist' (in target 'ShoeApp' from project 'ShoeApp')
+error: Unable to load contents of file list: '/Target Support Files/Pods-ShoeApp/Pods-ShoeApp-frameworks-Debug-output-files.xcfilelist' (in target 'ShoeApp' from project 'ShoeApp')
+error: Unable to load contents of file list: '/Target Support Files/Pods-ShoeApp/Pods-ShoeApp-resources-Debug-input-files.xcfilelist' (in target 'ShoeApp' from project 'ShoeApp')
+error: Unable to load contents of file list: '/Target Support Files/Pods-ShoeApp/Pods-ShoeApp-resources-Debug-output-files.xcfilelist' (in target 'ShoeApp' from project 'ShoeApp')
+warning: Unable to read contents of XCFileList '/Target Support Files/Pods-ShoeApp/Pods-ShoeApp-frameworks-Debug-output-files.xcfilelist' (in target 'ShoeApp' from project 'ShoeApp')
+warning: Unable to read contents of XCFileList '/Target Support Files/Pods-ShoeApp/Pods-ShoeApp-resources-Debug-output-files.xcfilelist' (in target 'ShoeApp' from project 'ShoeApp')
+
+2023-01-04 22:01:19.779 xcodebuild[7759:4999424] Requested but did not find extension point with identifier Xcode.IDEKit.ExtensionSentinelHostApplications for extension Xcode.DebuggerFoundation.AppExtensionHosts.watchOS of plug-in com.apple.dt.IDEWatchSupportCore
+2023-01-04 22:01:19.779 xcodebuild[7759:4999424] Requested but did not find extension point with identifier Xcode.IDEKit.ExtensionPointIdentifierToBundleIdentifier for extension Xcode.DebuggerFoundation.AppExtensionToBundleIdentifierMap.watchOS of plug-in com.apple.dt.IDEWatchSupportCore
+** BUILD FAILED **
+
+
+info Run CLI with --verbose flag for more details.
