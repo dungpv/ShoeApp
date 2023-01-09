@@ -1,14 +1,27 @@
 import React, {useState} from 'react';
-import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, View} from 'react-native';
 import {SIZES, theme} from '../../../../common/Theme';
 import {styles} from '../styles/Styles';
+import ShoeColor from './ShoeColor';
 import ShoesSize from './ShoesSize';
+
+const colors = [
+  theme.colors.black,
+  theme.colors.white,
+  theme.colors.red,
+  theme.colors.darkgray,
+];
 
 export default function ProductInfo({data}) {
   const [currentShoeSize, setCurrentShoeSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
 
   const handleChangeShoeSize = selectedShoeSize => {
     setCurrentShoeSize(selectedShoeSize);
+  };
+
+  const handleChangeProductColor = color => {
+    setSelectedColor(color);
   };
 
   return (
@@ -19,6 +32,7 @@ export default function ProductInfo({data}) {
         <View
           style={{
             alignItems: 'flex-start',
+            marginLeft: SIZES.padding * 4,
           }}>
           <Text style={styles.productInfo__name}>{data.name}</Text>
           <View style={styles.productInfo__priceColor}>
@@ -26,20 +40,11 @@ export default function ProductInfo({data}) {
               ${data.price}
             </Text>
 
-            <View style={styles.productInfo__colors}>
-              <Text>Colors: </Text>
-
-              <TouchableOpacity
-                style={[
-                  styles.productInfo__btnColor,
-                  {backgroundColor: theme.colors.black},
-                ]}></TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.productInfo__btnColor,
-                  {backgroundColor: theme.colors.white},
-                ]}></TouchableOpacity>
-            </View>
+            <ShoeColor
+              colors={colors}
+              colorSelected={selectedColor}
+              onSelectedColor={handleChangeProductColor}
+            />
           </View>
 
           <Text style={styles.productInfo__description}>

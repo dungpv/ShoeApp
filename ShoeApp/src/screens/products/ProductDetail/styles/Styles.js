@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 3,
   },
   productInfo__btnColor_selected: {
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: theme.colors.primary,
   },
   productInfo__description: {
