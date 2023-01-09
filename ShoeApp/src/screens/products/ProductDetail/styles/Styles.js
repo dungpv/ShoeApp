@@ -32,7 +32,8 @@ export const styles = StyleSheet.create({
   },
   productInfo__name: {
     fontSize: SIZES.fontSize130,
-    fontWeight: SIZES.fontWeight,
+    fontWeight: SIZES.fontWeight700,
+    color: theme.colors.primary,
   },
   productInfo__priceColor: {
     flexDirection: 'row',
@@ -44,18 +45,34 @@ export const styles = StyleSheet.create({
     fontSize: SIZES.fontSize24,
     fontWeight: SIZES.fontWeight,
   },
+  productInfo__colors: {
+    justifyContent: 'flex-end',
+    marginHorizontal: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   productInfo__btnColor: {
     height: 30,
     width: 30,
     borderRadius: 30,
     marginHorizontal: 3,
   },
-
+  productInfo__btnColor_selected: {
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
+  },
+  productInfo__description: {
+    fontSize: SIZES.fontSize24,
+    fontWeight: SIZES.fontWeight700,
+    color: theme.colors.secondary,
+    marginBottom: SIZES.padding,
+  },
   productInfo__btnSize: {
     height: 40,
     width: 40,
     borderRadius: 25,
     borderWidth: 1,
+    borderColor: theme.colors.primary,
     marginHorizontal: 3,
     marginVertical: SIZES.padding,
   },
@@ -66,6 +83,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: SIZES.padding,
   },
+  productInfo__btnSize_selected: {
+    backgroundColor: theme.colors.primary,
+  },
+  productInfo__btnSize_selectedText: {
+    color: theme.colors.white,
+  },
   addToCart: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -74,7 +97,7 @@ export const styles = StyleSheet.create({
   },
   addToCart__btnAdd: {
     backgroundColor: theme.colors.primary,
-    width: '80%',
+    flex: 1,
     height: 50,
   },
   addToCart__btnAdd_text: {
@@ -82,6 +105,6 @@ export const styles = StyleSheet.create({
     color: theme.colors.white,
     textAlign: 'center',
     fontWeight: SIZES.fontWeight,
-    marginTop: SIZES.padding,
+    marginTop: SIZES.padding + 5,
   },
 });

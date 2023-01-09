@@ -1,8 +1,8 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {ICONS} from '../../../../common/Constant';
-import {styles} from '../styles/Styles';
 import {theme} from '../../../../common/Theme';
+import {styles} from '../styles/Styles';
 
 export default function AddToCart() {
   return (

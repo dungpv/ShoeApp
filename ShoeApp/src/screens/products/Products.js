@@ -20,7 +20,6 @@ export default function Products() {
           header: () => <Header title="Marketplace" navigation={navigation} />,
         })}
       />
-      <Drawer.Screen name="ProductDetail" component={ProductDetail} />
       <Drawer.Screen name="EditProfileScreen" component={EditProfile} />
     </Drawer.Navigator>
   );

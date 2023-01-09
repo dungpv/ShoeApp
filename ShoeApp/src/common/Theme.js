@@ -9,6 +9,7 @@ export const SIZES = {
   height,
   radius: 10,
   fontWeight: '500',
+  fontWeight700: '700',
   fontSize24: 24,
   fontSize16: 16,
   fontSize130: 30,

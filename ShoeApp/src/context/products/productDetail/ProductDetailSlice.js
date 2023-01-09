@@ -1,0 +1,26 @@
+import {createSlice} from '@reduxjs/toolkit';
+import {getProductDetail} from './ProductDetailThunk';
+
+const initialState = {
+  productDetail: {},
+  isLoading: false,
+};
+
+const productDetailSlice = createSlice({
+  name: 'productDetailSlice',
+  initialState,
+  reducer: {},
+  extraReducers: builder => {
+    builder
+      .addCase(getProductDetail.pending, (state, _) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductDetail.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log('data', action);
+        state.productDetail = action.payload;
+      });
+  },
+});
+
+export default productDetailSlice.reducer;

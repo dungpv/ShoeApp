@@ -8,7 +8,8 @@ const initialState = {
 
 const productListSlice = createSlice({
   name: 'productListSlice',
-  initialState: initialState,
+  initialState,
+
   extraReducers: builder => {
     builder
       .addCase(getProduct.pending, (state, _) => {

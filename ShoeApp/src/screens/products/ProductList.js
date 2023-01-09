@@ -1,18 +1,24 @@
+import {useNavigation} from '@react-navigation/native';
+import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  Dimensions,
+  FlatList,
   Image,
   SafeAreaView,
-  FlatList,
-  Dimensions,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import React from 'react';
+import {useDispatch} from 'react-redux';
 import {ICONS} from '../../common/Constant';
+import {getProductDetail} from '../../context/products/productDetail/ProductDetailThunk';
 
 export default function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const shoesArray = [
     {
       id: 1,
@@ -161,14 +167,22 @@ export default function ProductList() {
     },
   ];
 
-  const renderItem = item => {
+  const _actionUpdateSelectedProduct = productId => {
+    dispatch(getProductDetail(productId));
+    navigation.push('ProductDetail');
+  };
+
+  const renderItem = ({item}) => {
     return (
-      <View style={styles.containerItem} key={item.id}>
+      <TouchableOpacity
+        onPress={() => _actionUpdateSelectedProduct(item.id)}
+        style={styles.containerItem}
+        key={item.id}>
         <View style={styles.avatarImage}>
           <Image
             style={styles.img}
             source={{
-              uri: item.item.image,
+              uri: item.image,
             }}
             resizeMode={'contain'}
           />
@@ -176,8 +190,8 @@ export default function ProductList() {
         <View style={styles.textImageWrap}>
           <View></View>
           <View>
-            <Text style={styles.textImageName}>{item.item.name}</Text>
-            <Text style={styles.textImagePrice}>$ {item.item.price}</Text>
+            <Text style={styles.textImageName}>{item.name}</Text>
+            <Text style={styles.textImagePrice}>$ {item.price}</Text>
           </View>
           <View
             style={{
@@ -203,7 +217,7 @@ export default function ProductList() {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
