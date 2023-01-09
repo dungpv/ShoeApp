@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {theme} from '../common/Theme';
@@ -19,6 +20,7 @@ import {
 export default function StartScreen() {
   const navigation = useNavigation();
   const [userToken, setUserToken] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getToken = async () => {
@@ -31,6 +33,7 @@ export default function StartScreen() {
 
   const redirectScreens = token => {
     console.log(token);
+    setIsLoading(!isLoading);
     if (token !== '' && token !== 'null' && token !== 'undefined') {
       setTimeout(() => {
         navigation.navigate('ProductsScreen');
@@ -48,32 +51,9 @@ export default function StartScreen() {
         <Image source={IMAGES.logo} style={styles.logo__image}></Image>
         <Text style={styles.app__header}>Shoes App</Text>
         <Text style={styles.app__slogan__text}>Amazing Application</Text>
-        {/* <Text style={styles.app__slogan__text}>
-          {userToken !== 'null' && userToken !== 'undefined'
-            ? 'has token'
-            : 'no token'}
-        </Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('LoginScreen')}
-          style={[styles.button, {backgroundColor: theme.colors.primary}]}>
-          <Text style={[styles.button__text, styles.button__text_white]}>
-            LOGIN
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('RegisterScreen')}
-          style={styles.button__signup}>
-          <Text style={[styles.button__text, styles.button__text_purple]}>
-            SIGN UP
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button__signup}
-          onPress={() => removeLocalStorageByKey('token')}>
-          <Text style={[styles.button__text, styles.button__text_purple]}>
-            Remove Token
-          </Text>
-        </TouchableOpacity> */}
+        {isLoading && (
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+        )}
       </View>
     </View>
   );
