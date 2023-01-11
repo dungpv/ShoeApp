@@ -5,8 +5,9 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
 import {ICONS, IMAGES} from '../../common/Constant';
@@ -18,6 +19,8 @@ import {login} from '../../context/users/login/LoginThunk';
 
 export default function Login() {
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(false);
+
   const validSchema = Yup.object().shape({
     email: Yup.string()
       .required('Vui lòng nhập email')
@@ -36,7 +39,12 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const signIn = async data => {
-    dispatch(login(data)).then(navigation.push('ProductsScreen'));
+    setIsLoading(!isLoading);
+    dispatch(login(data)).then(
+      setTimeout(() => {
+        navigation.push('ProductsScreen');
+      }, 1500),
+    );
     // const token = await getLocalStorageByKey(KEY_STORAGE.token);
     // console.log(`Token ${token}`);
   };
@@ -57,11 +65,11 @@ export default function Login() {
         // console.log(errors);
         return (
           <View style={styles.container}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={navigation.goBack}
               style={styles.container__button_back}>
               <Image style={styles.image__back} source={ICONS.iconBack} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Image source={IMAGES.logo} style={styles.logo__image}></Image>
             <Text style={styles.app__header}>Shoes App</Text>
             <Text style={styles.app__slogan__text}>Amazing Application</Text>
@@ -112,11 +120,32 @@ export default function Login() {
             </View>
             <TouchableOpacity
               onPress={handleSubmit}
-              style={[styles.button, {backgroundColor: theme.colors.primary}]}>
-              <Text style={[styles.button__text, styles.button__text_white]}>
-                LOGIN
-              </Text>
+              style={[
+                styles.button,
+                {
+                  backgroundColor: theme.colors.primary,
+                },
+              ]}>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}>
+                {isLoading && (
+                  <ActivityIndicator
+                    size="large"
+                    color={theme.colors.loading}
+                    style={{marginRight: 10}}
+                  />
+                )}
+                <Text style={[styles.button__text, styles.button__text_white]}>
+                  LOGIN
+                </Text>
+              </View>
             </TouchableOpacity>
+
             <View style={styles.row}>
               <Text>Don’t have an account? </Text>
               <TouchableOpacity

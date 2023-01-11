@@ -1,5 +1,12 @@
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  ActivityIndicator,
+} from 'react-native';
+import React, {useState} from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
 import {ICONS, IMAGES} from '../../common/Constant';
@@ -12,6 +19,8 @@ import RadioForm from 'react-native-simple-radio-button';
 
 export default function SignUp() {
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(false);
+
   var radio_props = [
     {label: 'Male', value: true},
     {label: 'Female', value: false},
@@ -40,6 +49,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
 
   const Register = data => {
+    setIsLoading(!isLoading);
     dispatch(signUp(data));
     setTimeout(() => navigation.navigate('LoginScreen'), 1000);
   };
@@ -61,11 +71,11 @@ export default function SignUp() {
         //console.log(errors);
         return (
           <View style={styles.container}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={navigation.goBack}
               style={styles.container__button_back}>
               <Image style={styles.image__back} source={ICONS.iconBack} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Image source={IMAGES.logo} style={styles.logo__image}></Image>
             <Text style={styles.app__header}>Shoes App</Text>
             <Text style={styles.app__slogan__text}>Amazing Application</Text>
@@ -157,9 +167,24 @@ export default function SignUp() {
             <TouchableOpacity
               style={[styles.button, {backgroundColor: theme.colors.primary}]}
               onPress={handleSubmit}>
-              <Text style={[styles.button__text, styles.button__text_white]}>
-                SIGN UP
-              </Text>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}>
+                {isLoading && (
+                  <ActivityIndicator
+                    size="large"
+                    color={theme.colors.loading}
+                    style={{marginRight: 10}}
+                  />
+                )}
+                <Text style={[styles.button__text, styles.button__text_white]}>
+                  SIGN UP
+                </Text>
+              </View>
             </TouchableOpacity>
             <View style={styles.row}>
               <Text>Already have an account? </Text>

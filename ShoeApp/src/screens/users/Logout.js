@@ -41,13 +41,25 @@ export default function Logout() {
         <TouchableOpacity
           onPress={handleLogout}
           style={[styles.button, {backgroundColor: theme.colors.primary}]}>
-          <Text style={[styles.button__text, styles.button__text_white]}>
-            LOG OUT
-          </Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+            }}>
+            {isLoading && (
+              <ActivityIndicator
+                size="large"
+                color={theme.colors.loading}
+                style={{marginRight: 10}}
+              />
+            )}
+            <Text style={[styles.button__text, styles.button__text_white]}>
+              SIGN OUT
+            </Text>
+          </View>
         </TouchableOpacity>
-        {isLoading && (
-          <ActivityIndicator size="large" color={theme.colors.primary} />
-        )}
       </View>
     </View>
   );

@@ -52,7 +52,7 @@ export default function StartScreen() {
         <Text style={styles.app__header}>Shoes App</Text>
         <Text style={styles.app__slogan__text}>Amazing Application</Text>
         {isLoading && (
-          <ActivityIndicator size="large" color={theme.colors.primary} />
+          <ActivityIndicator size="large" color={theme.colors.loading} />
         )}
       </View>
     </View>
