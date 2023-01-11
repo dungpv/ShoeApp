@@ -44,5 +44,5 @@ export const removeLocalStorageByKey = async keyName => {
   } catch (error) {
     return '';
   }
-  console.log('done');
+  console.log('remove token');
 };

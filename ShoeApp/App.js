@@ -9,6 +9,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Products from './src/screens/products/Products';
 import EditProfile from './src/screens/users/EditProfile';
+import Logout from './src/screens/users/Logout';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
           <Stack.Screen name="LoginScreen" component={Login} />
           <Stack.Screen name="RegisterScreen" component={SignUp} />
           <Stack.Screen name="EditProfileScreen" component={EditProfile} />
+          <Stack.Screen name="LogoutScreen" component={Logout} />
           <Stack.Screen name="ProductsScreen" component={Products} />
         </Stack.Navigator>
       </NavigationContainer>
