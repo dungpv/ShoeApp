@@ -2,34 +2,31 @@ import {
   View,
   Text,
   Image,
-  StyleSheet,
   TouchableOpacity,
-  SafeAreaView,
   ActivityIndicator,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
-import {IMAGES} from '../../common/Constant';
-import {useNavigation, StackActions} from '@react-navigation/native';
-import {
-  getLocalStorageByKey,
-  removeLocalStorageByKey,
-} from '../../common/LocalStorage';
+import {IMAGES, KEY_SCREENS, KEY_STORAGE} from '../../common/Constant';
+import {useNavigation} from '@react-navigation/native';
+import {removeLocalStorageByKey} from '../../common/LocalStorage';
 
 export default function Logout() {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const handleLogout = () => {
-    setIsLoading(!isLoading);
-    removeToken();
-    setTimeout(() => {
-      navigation.replace('LoginScreen');
-    }, 2000);
+    removeToken()
+      .then(() => setIsLoading(!isLoading))
+      .then(() =>
+        setTimeout(() => {
+          navigation.replace(KEY_SCREENS.loginScreen);
+        }, 1500),
+      );
   };
 
   const removeToken = async () => {
-    const token = await removeLocalStorageByKey('token');
+    await removeLocalStorageByKey(KEY_STORAGE.token);
   };
 
   return (
@@ -41,18 +38,12 @@ export default function Logout() {
         <TouchableOpacity
           onPress={handleLogout}
           style={[styles.button, {backgroundColor: theme.colors.primary}]}>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}>
+          <View style={styles.loadingView}>
             {isLoading && (
               <ActivityIndicator
                 size="large"
                 color={theme.colors.loading}
-                style={{marginRight: 10}}
+                style={styles.loadingButton}
               />
             )}
             <Text style={[styles.button__text, styles.button__text_white]}>

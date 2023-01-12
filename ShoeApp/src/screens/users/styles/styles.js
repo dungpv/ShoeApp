@@ -116,4 +116,11 @@ export default styles = StyleSheet.create({
     color: 'red',
     fontSize: 12,
   },
+  loadingView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  loadingButton: {marginRight: 10},
 });

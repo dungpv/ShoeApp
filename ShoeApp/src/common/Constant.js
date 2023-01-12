@@ -7,9 +7,12 @@ export const KEY_STORAGE = {
 };
 
 export const KEY_SCREENS = {
-  login: 'login',
-  homepage: 'homepage',
-  profile: 'profile',
+  loginScreen: 'LoginScreen',
+  startScreen: 'StartScreen',
+  registerScreen: 'RegisterScreen',
+  editProfileScreen: 'EditProfileScreen',
+  logoutScreen: 'LogoutScreen',
+  productsScreen: 'ProductsScreen',
 };
 
 export const ExpiredTime = 8 * 60 * 60 * 1000;
