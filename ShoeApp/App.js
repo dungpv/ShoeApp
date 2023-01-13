@@ -9,8 +9,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Products from './src/screens/products/Products';
 import EditProfile from './src/screens/users/EditProfile';
+import ChangePassword from './src/screens/users/ChangePassword';
 import Logout from './src/screens/users/Logout';
 import {KEY_SCREENS} from './src/common/Constant';
+import Toast from 'react-native-toast-message';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +35,10 @@ export default function App() {
             name={KEY_SCREENS.editProfileScreen}
             component={EditProfile}
           />
+          <Stack.Screen
+            name={KEY_SCREENS.changePasswordScreen}
+            component={ChangePassword}
+          />
           <Stack.Screen name={KEY_SCREENS.logoutScreen} component={Logout} />
           <Stack.Screen
             name={KEY_SCREENS.productsScreen}
@@ -40,6 +46,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast />
     </Provider>
   );
 }

@@ -12,6 +12,7 @@ export const KEY_SCREENS = {
   registerScreen: 'RegisterScreen',
   editProfileScreen: 'EditProfileScreen',
   logoutScreen: 'LogoutScreen',
+  changePasswordScreen: 'ChangePasswordScreen',
   productsScreen: 'ProductsScreen',
 };
 
@@ -36,3 +37,8 @@ export const IMAGES = {
 };
 
 export const API_URL = 'https://shop.cyberlearn.vn/api/';
+
+export const KEY_FIELDS_INPUT = {
+  email: 'email',
+  password: 'password',
+};

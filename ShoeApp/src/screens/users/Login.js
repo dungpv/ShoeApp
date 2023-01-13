@@ -10,12 +10,18 @@ import {
 import React, {useState} from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
-import {ICONS, IMAGES} from '../../common/Constant';
+import {
+  ICONS,
+  IMAGES,
+  KEY_FIELDS_INPUT,
+  KEY_SCREENS,
+} from '../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
 import {login} from '../../context/users/login/LoginThunk';
+import Toast from 'react-native-toast-message';
 
 export default function Login() {
   const navigation = useNavigation();
@@ -23,30 +29,38 @@ export default function Login() {
 
   const validSchema = Yup.object().shape({
     email: Yup.string()
-      .required('Vui lòng nhập email')
+      .required('Please enter your email')
       .matches(
         /^([\w.-]+)@(\[(\d{1,3}\.){3}|(?!yahoo\.mail)(([a-zA-Z\d-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$/,
-        'Sai định dạng và không dùng yahoo.mail',
+        'Wrong format and do not use yahoo.mail',
       ),
     password: Yup.string()
-      .required('Vui lòng nhập mật khẩu')
+      .required('Please enter your password')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        'Phải bao gồm chữ hoa, thường, ký tự đặc biệt, và 8 ký tự',
+        'Must include uppercase, lowercase, special characters, and 8 characters',
       ),
   });
 
   const dispatch = useDispatch();
 
   const signIn = async data => {
-    setIsLoading(!isLoading);
-    dispatch(login(data)).then(
-      setTimeout(() => {
-        navigation.push('ProductsScreen');
-      }, 1500),
-    );
-    // const token = await getLocalStorageByKey(KEY_STORAGE.token);
-    // console.log(`Token ${token}`);
+    dispatch(login(data))
+      .then(setIsLoading(!isLoading))
+      .then(
+        Toast.show({
+          position: 'top',
+          topOffset: 60,
+          type: 'success',
+          text1: 'Login Succeeded',
+          visibilityTime: 2000,
+        }),
+      )
+      .then(
+        setTimeout(() => {
+          navigation.push(KEY_SCREENS.productsScreen);
+        }, 1500),
+      );
   };
 
   return (
@@ -82,7 +96,7 @@ export default function Login() {
                 />
                 <TextInput
                   style={styles.containerInput__input__textInput}
-                  onChangeText={handleChange('email')}
+                  onChangeText={handleChange(KEY_FIELDS_INPUT.email)}
                 />
               </View>
             </View>
@@ -98,7 +112,7 @@ export default function Login() {
                 <TextInput
                   secureTextEntry={true}
                   style={styles.containerInput__input__textInput}
-                  onChangeText={handleChange('password')}
+                  onChangeText={handleChange(KEY_FIELDS_INPUT.password)}
                 />
               </View>
             </View>
@@ -114,7 +128,10 @@ export default function Login() {
               )}
             </View>
             <View style={styles.forgotPassword}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(KEY_SCREENS.changePasswordScreen)
+                }>
                 <Text style={styles.forgot}>Forgot your password?</Text>
               </TouchableOpacity>
             </View>
@@ -126,18 +143,12 @@ export default function Login() {
                   backgroundColor: theme.colors.primary,
                 },
               ]}>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-evenly',
-                  alignItems: 'center',
-                }}>
+              <View style={styles.loadingView}>
                 {isLoading && (
                   <ActivityIndicator
                     size="large"
                     color={theme.colors.loading}
-                    style={{marginRight: 10}}
+                    style={styles.loadingButton}
                   />
                 )}
                 <Text style={[styles.button__text, styles.button__text_white]}>
@@ -149,7 +160,7 @@ export default function Login() {
             <View style={styles.row}>
               <Text>Don’t have an account? </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('RegisterScreen')}>
+                onPress={() => navigation.navigate(KEY_SCREENS.registerScreen)}>
                 <Text style={styles.link}>Sign up</Text>
               </TouchableOpacity>
             </View>
