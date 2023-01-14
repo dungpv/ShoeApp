@@ -7,6 +7,7 @@ import ProductDetail from './ProductDetail';
 import EditProfile from '../users/EditProfile';
 import Header from '../../components/Header';
 import Logout from '../users/Logout';
+import ChangePassword from '../users/ChangePassword';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,6 +24,7 @@ export default function Products() {
       />
       <Drawer.Screen name="ProductDetail" component={ProductDetail} />
       <Drawer.Screen name="Edit Profile" component={EditProfile} />
+      <Drawer.Screen name="Change Password" component={ChangePassword} />
       <Drawer.Screen name="Logout" component={Logout} />
     </Drawer.Navigator>
   );

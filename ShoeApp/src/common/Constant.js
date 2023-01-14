@@ -14,6 +14,8 @@ export const KEY_SCREENS = {
   logoutScreen: 'LogoutScreen',
   changePasswordScreen: 'ChangePasswordScreen',
   productsScreen: 'ProductsScreen',
+  productsListScreen: 'ProductListScreen',
+  productsDetailScreen: 'ProductDetailScreen',
 };
 
 export const ExpiredTime = 8 * 60 * 60 * 1000;
@@ -41,4 +43,6 @@ export const API_URL = 'https://shop.cyberlearn.vn/api/';
 export const KEY_FIELDS_INPUT = {
   email: 'email',
   password: 'password',
+  phone: 'phone',
+  name: 'name',
 };

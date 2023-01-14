@@ -9,13 +9,19 @@ import {
 import React, {useState} from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
-import {ICONS, IMAGES} from '../../common/Constant';
+import {
+  ICONS,
+  IMAGES,
+  KEY_FIELDS_INPUT,
+  KEY_SCREENS,
+} from '../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Field, Formik} from 'formik';
 import {signUp} from '../../context/users/signup/SignUpThunk';
 import RadioForm from 'react-native-simple-radio-button';
+import Toast from 'react-native-toast-message';
 
 export default function SignUp() {
   const navigation = useNavigation();
@@ -27,31 +33,42 @@ export default function SignUp() {
   ];
 
   const validSchema = Yup.object().shape({
-    name: Yup.string().required('Vui lòng nhập Tên'),
+    name: Yup.string().required('Please enter your name'),
     email: Yup.string()
-      .required('Vui lòng nhập email')
+      .required('Please enter your email')
       .matches(
         /^([\w.-]+)@(\[(\d{1,3}\.){3}|(?!yahoo\.mail)(([a-zA-Z\d-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$/,
-        'Sai định dạng và không dùng yahoo.mail',
+        'Wrong format and do not use yahoo.mail',
       ),
     password: Yup.string()
-      .required('Vui lòng nhập mật khẩu')
+      .required('Please enter your password')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        'Phải bao gồm chữ hoa, thường, ký tự đặc biệt, và 8 ký tự',
+        'Must include uppercase, lowercase, special characters, and 8 characters',
       ),
     phone: Yup.string()
-      .required('Vui lòng nhập số điện thoại')
-      .min(10, 'Số điện thoại phải là 10 số')
-      .max(10, 'Số điện thoại là 10 số'),
+      .required('Please enter your phone')
+      .min(10, 'Phone must 10 numbers')
+      .max(10, 'Phone is 10 numbers'),
   });
 
   const dispatch = useDispatch();
 
   const Register = data => {
-    setIsLoading(!isLoading);
-    dispatch(signUp(data));
-    setTimeout(() => navigation.navigate('LoginScreen'), 1000);
+    dispatch(signUp(data))
+      .then(setIsLoading(!isLoading))
+      .then(
+        Toast.show({
+          position: 'top',
+          topOffset: 60,
+          type: 'success',
+          text1: 'Sign Up Succeeded',
+          visibilityTime: 2000,
+        }),
+      )
+      .then(
+        setTimeout(() => navigation.navigate(KEY_SCREENS.loginScreen), 1500),
+      );
   };
 
   return (
@@ -85,7 +102,7 @@ export default function SignUp() {
                 <TextInput
                   style={styles.containerInput__input__textInput}
                   placeholder="Name"
-                  onChangeText={handleChange('name')}
+                  onChangeText={handleChange(KEY_FIELDS_INPUT.name)}
                 />
               </View>
             </View>
@@ -121,7 +138,7 @@ export default function SignUp() {
                 <TextInput
                   style={styles.containerInput__input__textInput}
                   placeholder="Phone"
-                  onChangeText={handleChange('phone')}
+                  onChangeText={handleChange(KEY_FIELDS_INPUT.phone)}
                 />
               </View>
             </View>
@@ -131,7 +148,7 @@ export default function SignUp() {
                 <TextInput
                   style={styles.containerInput__input__textInput}
                   placeholder="example@gmail.com"
-                  onChangeText={handleChange('email')}
+                  onChangeText={handleChange(KEY_FIELDS_INPUT.email)}
                 />
               </View>
             </View>
@@ -143,7 +160,7 @@ export default function SignUp() {
                   secureTextEntry={true}
                   style={styles.containerInput__input__textInput}
                   placeholder="Password"
-                  onChangeText={handleChange('password')}
+                  onChangeText={handleChange(KEY_FIELDS_INPUT.password)}
                 />
               </View>
             </View>
@@ -167,18 +184,12 @@ export default function SignUp() {
             <TouchableOpacity
               style={[styles.button, {backgroundColor: theme.colors.primary}]}
               onPress={handleSubmit}>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-evenly',
-                  alignItems: 'center',
-                }}>
+              <View style={styles.loadingView}>
                 {isLoading && (
                   <ActivityIndicator
                     size="large"
                     color={theme.colors.loading}
-                    style={{marginRight: 10}}
+                    style={styles.loadingButton}
                   />
                 )}
                 <Text style={[styles.button__text, styles.button__text_white]}>
@@ -189,7 +200,7 @@ export default function SignUp() {
             <View style={styles.row}>
               <Text>Already have an account? </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('LoginScreen')}>
+                onPress={() => navigation.navigate(KEY_SCREENS.loginScreen)}>
                 <Text style={styles.link}>Login</Text>
               </TouchableOpacity>
             </View>

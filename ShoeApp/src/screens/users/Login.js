@@ -130,7 +130,13 @@ export default function Login() {
             <View style={styles.forgotPassword}>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate(KEY_SCREENS.changePasswordScreen)
+                  Toast.show({
+                    position: 'top',
+                    topOffset: 60,
+                    type: 'info',
+                    text1: 'Functional Upgrading',
+                    visibilityTime: 2000,
+                  })
                 }>
                 <Text style={styles.forgot}>Forgot your password?</Text>
               </TouchableOpacity>

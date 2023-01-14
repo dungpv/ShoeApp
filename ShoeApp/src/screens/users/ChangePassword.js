@@ -9,12 +9,18 @@ import {
 import React, {useState} from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
-import {ICONS, IMAGES} from '../../common/Constant';
+import {
+  ICONS,
+  IMAGES,
+  KEY_FIELDS_INPUT,
+  KEY_SCREENS,
+} from '../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
 import {changePassword} from '../../context/users/changepassword/ChangePasswordThunk';
+import Toast from 'react-native-toast-message';
 
 export default function ChangePassword() {
   const navigation = useNavigation();
@@ -22,19 +28,30 @@ export default function ChangePassword() {
 
   const validSchema = Yup.object().shape({
     password: Yup.string()
-      .required('Vui lòng nhập mật khẩu')
+      .required('Please enter your password')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        'Phải bao gồm chữ hoa, thường, ký tự đặc biệt, và 8 ký tự',
+        'Must include uppercase, lowercase, special characters, and 8 characters',
       ),
   });
 
   const dispatch = useDispatch();
 
   const changePass = data => {
-    setIsLoading(!isLoading);
-    dispatch(changePassword(data));
-    setTimeout(() => navigation.navigate('ProductsScreen'), 1000);
+    dispatch(changePassword(data))
+      .then(setIsLoading(!isLoading))
+      .then(
+        Toast.show({
+          position: 'top',
+          topOffset: 60,
+          type: 'success',
+          text1: 'Change Password Succeeded',
+          visibilityTime: 2000,
+        }),
+      )
+      .then(
+        setTimeout(() => navigation.navigate(KEY_SCREENS.productsScreen), 1500),
+      );
   };
 
   return (
@@ -66,7 +83,7 @@ export default function ChangePassword() {
                   secureTextEntry={true}
                   style={styles.containerInput__input__textInput}
                   placeholder="Password"
-                  onChangeText={handleChange('password')}
+                  onChangeText={handleChange(KEY_FIELDS_INPUT.password)}
                 />
               </View>
             </View>
@@ -81,18 +98,12 @@ export default function ChangePassword() {
             <TouchableOpacity
               style={[styles.button, {backgroundColor: theme.colors.primary}]}
               onPress={handleSubmit}>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-evenly',
-                  alignItems: 'center',
-                }}>
+              <View style={styles.loadingView}>
                 {isLoading && (
                   <ActivityIndicator
                     size="large"
                     color={theme.colors.loading}
-                    style={{marginRight: 10}}
+                    style={styles.loadingButton}
                   />
                 )}
                 <Text style={[styles.button__text, styles.button__text_white]}>
