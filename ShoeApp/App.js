@@ -1,7 +1,6 @@
 import {View, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Provider, useDispatch} from 'react-redux';
-import {store} from './src/context/store';
 import StartScreen from './src/screens/StartScreen';
 import Login from './src/screens/users/Login';
 import SignUp from './src/screens/users/SignUp';
@@ -13,6 +12,8 @@ import ChangePassword from './src/screens/users/ChangePassword';
 import Logout from './src/screens/users/Logout';
 import {KEY_SCREENS} from './src/common/Constant';
 import Toast from 'react-native-toast-message';
+import ProductDetail from './src/screens/products/ProductDetail/ProductDetail';
+import {store} from './src/redux/store';
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,11 @@ export default function App() {
           <Stack.Screen
             name={KEY_SCREENS.productsScreen}
             component={Products}
+          />
+
+          <Stack.Screen
+            name={KEY_SCREENS.productDetail}
+            component={ProductDetail}
           />
         </Stack.Navigator>
       </NavigationContainer>

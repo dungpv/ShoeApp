@@ -19,7 +19,7 @@ import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
-import {changePassword} from '../../context/users/changepassword/ChangePasswordThunk';
+import {changePassword} from '../../redux/users/changepassword/ChangePasswordThunk';
 import Toast from 'react-native-toast-message';
 
 export default function ChangePassword() {

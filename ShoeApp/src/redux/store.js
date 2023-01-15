@@ -4,6 +4,8 @@ import signUpReducer from './users/signup/SignUpSlice';
 import editProfileReducer from './users/editprofile/EditProfileSlice';
 import changePasswordReducer from './users/changepassword/ChangePasswordSlice';
 import productListReducer from './products/productlist/ProductListSlice';
+import productDetailReducer from './products/productDetail/ProductDetailSlice';
+import favoriteProductReducer from './users/favorite/FavoriteProductSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +14,7 @@ export const store = configureStore({
     editProfileReducer,
     changePasswordReducer,
     productListReducer,
+    productDetailReducer,
+    favoriteProductReducer,
   },
 });

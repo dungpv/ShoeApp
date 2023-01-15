@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {ICONS} from '../../common/Constant';
+import {ICONS, KEY_SCREENS} from '../../common/Constant';
 import {useDispatch, useSelector} from 'react-redux';
-import {getProduct} from '../../context/products/productlist/ProductListThunk';
+import {getProduct} from '../../redux/products/productlist/ProductListThunk';
+import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
+import {useNavigation} from '@react-navigation/native';
 
 export default function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -20,6 +22,7 @@ export default function ProductList() {
     state => state.productListReducer.productData,
   );
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   useEffect(() => {
     dispatch(getProduct());
@@ -41,9 +44,17 @@ export default function ProductList() {
     return false;
   };
 
+  const _actionUpdateSelectedProduct = productId => {
+    dispatch(getProductDetail(productId));
+    navigation.push(KEY_SCREENS.productDetail);
+  };
+
   const renderItem = item => {
     return (
-      <View style={styles.containerItem} key={item.id}>
+      <TouchableOpacity
+        style={styles.containerItem}
+        key={item.item.id}
+        onPress={() => _actionUpdateSelectedProduct(item.item.id)}>
         <View style={styles.avatarImage}>
           <Image
             style={styles.img}
@@ -91,7 +102,7 @@ export default function ProductList() {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

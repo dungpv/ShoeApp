@@ -20,7 +20,7 @@ import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Formik} from 'formik';
-import {login} from '../../context/users/login/LoginThunk';
+import {login} from '../../redux/users/login/LoginThunk';
 import Toast from 'react-native-toast-message';
 
 export default function Login() {

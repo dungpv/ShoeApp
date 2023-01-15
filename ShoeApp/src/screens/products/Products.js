@@ -3,7 +3,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import ProductList from './ProductList';
-import ProductDetail from './ProductDetail';
+import ProductDetail from './ProductDetail/ProductDetail';
 import EditProfile from '../users/EditProfile';
 import Header from '../../components/Header';
 import Logout from '../users/Logout';
@@ -22,10 +22,10 @@ export default function Products() {
           header: () => <Header title="Marketplace" navigation={navigation} />,
         })}
       />
-      <Drawer.Screen name="ProductDetail" component={ProductDetail} />
       <Drawer.Screen name="Edit Profile" component={EditProfile} />
       <Drawer.Screen name="Change Password" component={ChangePassword} />
       <Drawer.Screen name="Logout" component={Logout} />
+      <Drawer.Screen name="EditProfileScreen" component={EditProfile} />
     </Drawer.Navigator>
   );
 }
