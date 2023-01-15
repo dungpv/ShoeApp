@@ -37,11 +37,14 @@ export default function ProductInfo({
           </View>
 
           <Text style={styles.productInfo__description}>
+
             {data.shortDescription.trim()}
           </Text>
           <Text style={{marginBottom: SIZES.padding}}>
             {data.description.trim()}
+
           </Text>
+          
 
           <ShoesSize
             dataSize={data.size}

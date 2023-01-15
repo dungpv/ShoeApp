@@ -8,6 +8,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Products from './src/screens/products/Products';
 import EditProfile from './src/screens/users/EditProfile';
+import ChangePassword from './src/screens/users/ChangePassword';
+import Logout from './src/screens/users/Logout';
+import {KEY_SCREENS} from './src/common/Constant';
+import Toast from 'react-native-toast-message';
 import ProductDetail from './src/screens/products/ProductDetail/ProductDetail';
 import {store} from './src/redux/store';
 
@@ -18,18 +22,37 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="StartScreen"
+          initialRouteName={KEY_SCREENS.startScreen}
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen name="StartScreen" component={StartScreen} />
-          <Stack.Screen name="LoginScreen" component={Login} />
-          <Stack.Screen name="RegisterScreen" component={SignUp} />
-          <Stack.Screen name="EditProfileScreen" component={EditProfile} />
-          <Stack.Screen name="ProductsScreen" component={Products} />
-          <Stack.Screen name="ProductDetail" component={ProductDetail} />
+          <Stack.Screen
+            name={KEY_SCREENS.startScreen}
+            component={StartScreen}
+          />
+          <Stack.Screen name={KEY_SCREENS.loginScreen} component={Login} />
+          <Stack.Screen name={KEY_SCREENS.registerScreen} component={SignUp} />
+          <Stack.Screen
+            name={KEY_SCREENS.editProfileScreen}
+            component={EditProfile}
+          />
+          <Stack.Screen
+            name={KEY_SCREENS.changePasswordScreen}
+            component={ChangePassword}
+          />
+          <Stack.Screen name={KEY_SCREENS.logoutScreen} component={Logout} />
+          <Stack.Screen
+            name={KEY_SCREENS.productsScreen}
+            component={Products}
+          />
+
+          <Stack.Screen
+            name={KEY_SCREENS.productDetail}
+            component={ProductDetail}
+          />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast />
     </Provider>
   );
 }

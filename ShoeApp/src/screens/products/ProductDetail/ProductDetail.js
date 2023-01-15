@@ -13,6 +13,7 @@ export default function ProductDetail() {
 
   const data = useSelector(state => state.productDetailReducer.productDetail);
 
+
   const colors = [
     theme.colors.black,
     theme.colors.white,
@@ -26,6 +27,7 @@ export default function ProductDetail() {
   const _onChangeProductColor = color => {
     setSelectedColor(color);
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <NavBar />

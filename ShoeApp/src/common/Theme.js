@@ -23,6 +23,7 @@ export const theme = {
     primary: '#560CCE',
     secondary: '#414757',
     error: '#f13a59',
+    loading: '#f48225',
     white: '#FFFFFF',
     black: '#000000',
     lightGray: '#F5F5F6',

@@ -1,12 +1,21 @@
 export const KEY_STORAGE = {
   token: 'token',
   category: 'category',
+  product: 'product',
+  userLike: 'userLike',
+  userUnlike: 'userUnlike',
 };
 
 export const KEY_SCREENS = {
-  login: 'login',
-  homepage: 'homepage',
-  profile: 'profile',
+  loginScreen: 'LoginScreen',
+  startScreen: 'StartScreen',
+  registerScreen: 'RegisterScreen',
+  editProfileScreen: 'EditProfileScreen',
+  logoutScreen: 'LogoutScreen',
+  changePasswordScreen: 'ChangePasswordScreen',
+  productsScreen: 'ProductsScreen',
+  productsListScreen: 'ProductListScreen',
+  productDetail: 'ProductDetail',
 };
 
 export const ExpiredTime = 8 * 60 * 60 * 1000;
@@ -32,3 +41,10 @@ export const IMAGES = {
 };
 
 export const API_URL = 'https://shop.cyberlearn.vn/api/';
+
+export const KEY_FIELDS_INPUT = {
+  email: 'email',
+  password: 'password',
+  phone: 'phone',
+  name: 'name',
+};
