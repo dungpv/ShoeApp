@@ -9,12 +9,11 @@ import {useSelector} from 'react-redux';
 export default function ProductDetail() {
   const data = useSelector(state => state.productDetailReducer.productDetail);
 
-  console.log('product detail', data);
   return (
     <SafeAreaView style={styles.container}>
       <NavBar />
       <ProductInfo data={data} />
-      <AddToCart productId={data.id} />
+      <AddToCart productDetail={data} />
     </SafeAreaView>
   );
 }
