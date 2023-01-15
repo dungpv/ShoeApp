@@ -4,7 +4,6 @@ import {styles} from '../styles/Styles';
 
 export default function ShoeColor({colors, colorSelected, onSelectedColor}) {
   const renderProductColor = ({item}) => {
-    console.log(item);
     return (
       <TouchableOpacity
         key={item}

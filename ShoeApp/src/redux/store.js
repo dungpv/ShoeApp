@@ -5,6 +5,7 @@ import editProfileReducer from './users/editprofile/EditProfileSlice';
 import changePasswordReducer from './users/changepassword/ChangePasswordSlice';
 import productListReducer from './products/productlist/ProductListSlice';
 import productDetailReducer from './products/productDetail/ProductDetailSlice';
+import favoriteProductReducer from './users/favorite/FavoriteProductSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     changePasswordReducer,
     productListReducer,
     productDetailReducer,
+    favoriteProductReducer,
   },
 });

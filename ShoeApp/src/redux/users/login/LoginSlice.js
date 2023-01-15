@@ -18,10 +18,12 @@ const loginSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log(action.payload);
+
+        state.accessToken = action.payload;
+        console.log('token', state.accessToken);
         // lay duoc token va luu lai
         saveStorage(KEY_STORAGE.token, action.payload);
-
-        console.log(action.payload);
       });
   },
 });

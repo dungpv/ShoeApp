@@ -7,8 +7,8 @@ import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Field, Formik} from 'formik';
-import {editProfile} from '../../context/users/editprofile/EditProfileThunk';
 import RadioForm from 'react-native-simple-radio-button';
+import {editProfile} from '../../redux/users/editprofile/EditProfileThunk';
 
 export default function EditProfile() {
   const navigation = useNavigation();

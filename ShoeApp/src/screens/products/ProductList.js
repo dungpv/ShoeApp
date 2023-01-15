@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {ICONS} from '../../common/Constant';
-import {getProductDetail} from '../../context/products/productDetail/ProductDetailThunk';
+import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
 
 export default function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;

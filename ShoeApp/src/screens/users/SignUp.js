@@ -7,8 +7,8 @@ import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
 import {Field, Formik} from 'formik';
-import {signUp} from '../../context/users/signup/SignUpThunk';
 import RadioForm from 'react-native-simple-radio-button';
+import {signUp} from '../../redux/users/signup/SignUpThunk';
 
 export default function SignUp() {
   const navigation = useNavigation();

@@ -1,7 +1,6 @@
 import {View, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Provider, useDispatch} from 'react-redux';
-import {store} from './src/context/store';
 import StartScreen from './src/screens/StartScreen';
 import Login from './src/screens/users/Login';
 import SignUp from './src/screens/users/SignUp';
@@ -10,6 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Products from './src/screens/products/Products';
 import EditProfile from './src/screens/users/EditProfile';
 import ProductDetail from './src/screens/products/ProductDetail/ProductDetail';
+import {store} from './src/redux/store';
 
 const Stack = createStackNavigator();
 

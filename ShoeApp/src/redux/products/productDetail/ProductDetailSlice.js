@@ -9,7 +9,6 @@ const initialState = {
 const productDetailSlice = createSlice({
   name: 'productDetailSlice',
   initialState,
-  reducer: {},
   extraReducers: builder => {
     builder
       .addCase(getProductDetail.pending, (state, _) => {

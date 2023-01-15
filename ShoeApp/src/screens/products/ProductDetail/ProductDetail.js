@@ -14,7 +14,7 @@ export default function ProductDetail() {
     <SafeAreaView style={styles.container}>
       <NavBar />
       <ProductInfo data={data} />
-      <AddToCart />
+      <AddToCart productId={data.id} />
     </SafeAreaView>
   );
 }

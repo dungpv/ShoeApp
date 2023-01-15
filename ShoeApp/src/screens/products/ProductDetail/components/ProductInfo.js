@@ -47,12 +47,12 @@ export default function ProductInfo({data}) {
             />
           </View>
 
-          <Text style={styles.productInfo__description}>
+          {/* <Text style={styles.productInfo__description}>
             {data.shortDescription.replace(/(\r\n|\n|\r)/gm, '')}
           </Text>
           <Text style={{marginBottom: SIZES.padding}}>
             {data.description.replace(/(\r\n|\n|\r)/gm, '')}
-          </Text>
+          </Text> */}
 
           <ShoesSize
             dataSize={data.size}
