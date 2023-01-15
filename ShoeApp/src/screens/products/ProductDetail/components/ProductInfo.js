@@ -5,25 +5,14 @@ import {styles} from '../styles/Styles';
 import ShoeColor from './ShoeColor';
 import ShoesSize from './ShoesSize';
 
-const colors = [
-  theme.colors.black,
-  theme.colors.white,
-  theme.colors.red,
-  theme.colors.darkgray,
-];
-
-export default function ProductInfo({data}) {
-  const [currentShoeSize, setCurrentShoeSize] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
-
-  const handleChangeShoeSize = selectedShoeSize => {
-    setCurrentShoeSize(selectedShoeSize);
-  };
-
-  const handleChangeProductColor = color => {
-    setSelectedColor(color);
-  };
-
+export default function ProductInfo({
+  data,
+  colors,
+  selectedColor,
+  currentShoeSize,
+  handleChangeProductColor,
+  handleChangeShoeSize,
+}) {
   return (
     <ScrollView>
       <View style={styles.productInfo__container}>
@@ -48,11 +37,14 @@ export default function ProductInfo({data}) {
           </View>
 
           <Text style={styles.productInfo__description}>
-            {data.shortDescription.replace(/(\r\n|\n|\r)/gm, '')}
+
+            {data.shortDescription.trim()}
           </Text>
           <Text style={{marginBottom: SIZES.padding}}>
-            {data.description.replace(/(\r\n|\n|\r)/gm, '')}
+            {data.description.trim()}
+
           </Text>
+          
 
           <ShoesSize
             dataSize={data.size}

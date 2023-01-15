@@ -99,6 +99,7 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     flex: 1,
     height: 50,
+    marginRight: SIZES.padding,
   },
   addToCart__btnAdd_text: {
     fontSize: SIZES.fontSize16,

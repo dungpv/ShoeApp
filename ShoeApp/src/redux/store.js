@@ -6,6 +6,7 @@ import changePasswordReducer from './users/changepassword/ChangePasswordSlice';
 import productListReducer from './products/productlist/ProductListSlice';
 import productDetailReducer from './products/productDetail/ProductDetailSlice';
 import favoriteProductReducer from './users/favorite/FavoriteProductSlice';
+import shoppingCartReducer from './users/cart/ShoppingCartSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     productListReducer,
     productDetailReducer,
     favoriteProductReducer,
+    shoppingCartReducer,
   },
 });
