@@ -15,6 +15,7 @@ export const SIZES = {
   fontSize130: 30,
   margin8: 8,
   margin16: 16,
+  borderRadius: 30,
 };
 
 export const theme = {

@@ -16,6 +16,7 @@ export const KEY_SCREENS = {
   productsScreen: 'ProductsScreen',
   productsListScreen: 'ProductListScreen',
   productDetail: 'ProductDetail',
+  productCart: 'ProductCart',
 };
 
 export const ExpiredTime = 8 * 60 * 60 * 1000;
@@ -34,6 +35,7 @@ export const ICONS = {
   iconLove: require('../assets/love.png'),
   iconMore: require('../assets/iconMore.png'),
   iconColor: require('../assets/iconColor.png'),
+  iconAddFavorite: require('../assets/addFavorite.png'),
 };
 
 export const IMAGES = {

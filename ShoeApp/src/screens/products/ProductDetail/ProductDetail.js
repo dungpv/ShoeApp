@@ -1,4 +1,4 @@
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text} from 'react-native';
 import React, {useState} from 'react';
 import NavBar from './components/NavBar';
 import ProductInfo from './components/ProductInfo';
@@ -6,13 +6,13 @@ import {styles} from './styles/Styles';
 import AddToCart from './components/AddToCart';
 import {useSelector} from 'react-redux';
 import {theme} from '../../../common/Theme';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export default function ProductDetail() {
   const [currentShoeSize, setCurrentShoeSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
 
   const data = useSelector(state => state.productDetailReducer.productDetail);
-
 
   const colors = [
     theme.colors.black,

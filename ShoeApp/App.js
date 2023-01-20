@@ -1,19 +1,19 @@
-import {View, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {Provider, useDispatch} from 'react-redux';
-import StartScreen from './src/screens/StartScreen';
-import Login from './src/screens/users/Login';
-import SignUp from './src/screens/users/SignUp';
-import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import Products from './src/screens/products/Products';
-import EditProfile from './src/screens/users/EditProfile';
-import ChangePassword from './src/screens/users/ChangePassword';
-import Logout from './src/screens/users/Logout';
-import {KEY_SCREENS} from './src/common/Constant';
+import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
 import Toast from 'react-native-toast-message';
-import ProductDetail from './src/screens/products/ProductDetail/ProductDetail';
+import {Provider} from 'react-redux';
+import {KEY_SCREENS} from './src/common/Constant';
 import {store} from './src/redux/store';
+import ProductDetail from './src/screens/products/ProductDetail/ProductDetail';
+import Products from './src/screens/products/Products';
+import StartScreen from './src/screens/StartScreen';
+import ChangePassword from './src/screens/users/ChangePassword';
+import EditProfile from './src/screens/users/EditProfile';
+import Login from './src/screens/users/Login';
+import Logout from './src/screens/users/Logout';
+import ProductCart from './src/screens/users/ProductCart/ProductCart';
+import SignUp from './src/screens/users/SignUp';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +49,11 @@ export default function App() {
           <Stack.Screen
             name={KEY_SCREENS.productDetail}
             component={ProductDetail}
+          />
+
+          <Stack.Screen
+            name={KEY_SCREENS.productCart}
+            component={ProductCart}
           />
         </Stack.Navigator>
       </NavigationContainer>

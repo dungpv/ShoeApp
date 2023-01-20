@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
   navBar__title: {
     fontSize: SIZES.fontSize16,
     fontWeight: SIZES.fontWeight,
+    textAlign: 'center',
   },
   productInfo__container: {
     alignItems: 'center',
