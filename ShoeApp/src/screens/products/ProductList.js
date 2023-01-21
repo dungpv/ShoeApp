@@ -7,6 +7,7 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {ICONS, KEY_SCREENS} from '../../common/Constant';
@@ -14,10 +15,23 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getProduct} from '../../redux/products/productlist/ProductListThunk';
 import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
 import {useNavigation} from '@react-navigation/native';
+import {theme} from '../../common/Theme';
+import CustomShoeSize from '../../components/CustomShoeSize';
+import {addCartItem} from '../../redux/users/cart/ShoppingCartSlice';
+import CustomShoeColor from '../../components/CustomShoeColor';
+import Toast from 'react-native-toast-message';
 
 export default function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const [favoriteList, setFavoriteList] = useState([]);
+  const colors = [
+    theme.colors.black,
+    theme.colors.white1,
+    theme.colors.red,
+    theme.colors.darkgray,
+  ];
+  const sizes = [36, 37, 38, 39, 40, 41, 42];
+
   const productData = useSelector(
     state => state.productListReducer.productData,
   );
@@ -37,7 +51,7 @@ export default function ProductList() {
     setFavoriteList(filteredList);
   };
 
-  const ifExists = product => {
+  const ifExistsFavorite = product => {
     if (favoriteList.filter(item => item.id === product.id).length > 0) {
       return true;
     }
@@ -45,31 +59,51 @@ export default function ProductList() {
   };
 
   const _actionUpdateSelectedProduct = productId => {
-    dispatch(getProductDetail(productId));
-    navigation.push(KEY_SCREENS.productDetail);
+    dispatch(getProductDetail(productId)).then(
+      setTimeout(() => {
+        navigation.push(KEY_SCREENS.productDetail);
+      }, 1500),
+    );
   };
 
-  const renderItem = item => {
+  const handleAddToCart = cartItem => {
+    dispatch(addCartItem(cartItem));
+    Toast.show({
+      position: 'top',
+      topOffset: 60,
+      type: 'success',
+      text1: `Successfully added item ${cartItem.name} to cart!`,
+      visibilityTime: 1500,
+    });
+  };
+
+  const renderItem = ({item}) => {
+    const size =
+      item.size.length > 0 ? item.size.replace('[', '').replace(']', '') : '';
+    const customSize = size != '' ? size.split(',').map(Number) : sizes;
     return (
-      <TouchableOpacity
-        style={styles.containerItem}
-        key={item.item.id}
-        onPress={() => _actionUpdateSelectedProduct(item.item.id)}>
+      <View style={styles.containerItem} key={item.id}>
         <View style={styles.avatarImage}>
-          <Image
-            style={styles.img}
-            source={{
-              uri: item.item.image,
-            }}
-            resizeMode={'contain'}
-          />
+          <TouchableOpacity
+            onPress={() => _actionUpdateSelectedProduct(item.id)}>
+            <Image
+              style={styles.img}
+              source={{
+                uri: item.image,
+              }}
+              resizeMode={'contain'}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.textImageWrap}>
           <View></View>
-          <View>
-            <Text style={styles.textImageName}>{item.item.name}</Text>
-            <Text style={styles.textImagePrice}>$ {item.item.price}</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => _actionUpdateSelectedProduct(item.id)}>
+            <Text style={styles.textImageName}>{item.name}</Text>
+            <Text style={styles.textImagePrice}>$ {item.price}</Text>
+          </TouchableOpacity>
+          <CustomShoeColor colors={colors} />
+          <CustomShoeSize dataSize={customSize}></CustomShoeSize>
           <View
             style={{
               flexDirection: 'row',
@@ -82,7 +116,16 @@ export default function ProductList() {
                 borderRadius: 10,
                 marginBottom: 30,
               }}
-              onPress={() => {}}>
+              onPress={() => {
+                const productCartItem = {
+                  cartId: `${item.id}`,
+                  name: item.name,
+                  image: item.image,
+                  price: item.price,
+                  quantity: 1,
+                };
+                handleAddToCart(productCartItem);
+              }}>
               <Text style={{color: 'white', fontWeight: '600'}}>
                 Add To Card
               </Text>
@@ -90,19 +133,19 @@ export default function ProductList() {
             <TouchableOpacity
               style={{marginLeft: 10, marginTop: 5}}
               onPress={() =>
-                ifExists(item.item)
-                  ? onRemoveFavorite(item.item)
-                  : onFavorite(item.item)
+                ifExistsFavorite(item)
+                  ? onRemoveFavorite(item)
+                  : onFavorite(item)
               }>
               <Image
                 style={styles.icon}
                 source={
-                  ifExists(item.item) ? ICONS.iconLove : ICONS.iconUnlike
+                  ifExistsFavorite(item) ? ICONS.iconLove : ICONS.iconUnlike
                 }></Image>
             </TouchableOpacity>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   };
 
@@ -122,10 +165,10 @@ export default function ProductList() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 5,
   },
   mainWrapperView: {
-    paddingTop: 10,
+    paddingTop: 5,
   },
   activityIndicatorWrapper: {
     alignSelf: 'center',
@@ -138,7 +181,7 @@ const styles = StyleSheet.create({
   },
   containerItem: {
     width: 370,
-    height: 280,
+    height: 270,
     backgroundColor: 'white',
     borderRadius: 18,
     margin: 20,

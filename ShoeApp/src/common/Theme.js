@@ -34,5 +34,6 @@ export const theme = {
     transparent: 'transparent',
     darkgray: '#898C95',
     red: '#FF4500',
+    white1: '#F5F5F5',
   },
 };

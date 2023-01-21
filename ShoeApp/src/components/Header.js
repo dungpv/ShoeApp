@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
-import {ICONS} from '../common/Constant';
+import {ICONS, KEY_SCREENS} from '../common/Constant';
 
 const Header = ({navigation, title}) => {
   const openMenu = () => {
@@ -18,7 +18,9 @@ const Header = ({navigation, title}) => {
       <View style={styles.headerTitle}>
         <Text style={styles.headerText}>{title}</Text>
       </View>
-      <TouchableOpacity onPress={() => {}} style={styles.iconsRight}>
+      <TouchableOpacity
+        onPress={() => navigation.push(KEY_SCREENS.productCart)}
+        style={styles.iconsRight}>
         <Image
           style={styles.icon}
           source={ICONS.iconShoppingCart}

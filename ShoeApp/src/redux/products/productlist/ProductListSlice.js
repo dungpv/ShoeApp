@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {getProduct} from './ProductListThunk';
 
 const initialState = {
-  productData: [],
+  productData: {},
   isLoading: false,
 };
 

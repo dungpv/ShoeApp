@@ -35,13 +35,10 @@ export default function ProductInfo({
               onSelectedColor={handleChangeProductColor}
             />
           </View>
-
           <Text style={styles.productInfo__description}>
-            {data.shortDescription.trim()}
+            {data.shortDescription}
           </Text>
-          <Text style={{marginBottom: SIZES.padding}}>
-            {data.description.trim()}
-          </Text>
+          <Text style={{marginBottom: SIZES.padding}}>{data.description}</Text>
           <ShoesSize
             dataSize={data.size}
             shoeSizeSelected={currentShoeSize}
