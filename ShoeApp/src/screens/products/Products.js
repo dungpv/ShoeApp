@@ -8,12 +8,15 @@ import EditProfile from '../users/EditProfile';
 import Header from '../../components/Header';
 import Logout from '../users/Logout';
 import ChangePassword from '../users/ChangePassword';
+import CustomSidebarMenu from '../../components/CustomSidebarMenu';
 
 const Drawer = createDrawerNavigator();
 
 export default function Products() {
   return (
-    <Drawer.Navigator initialRouteName="ProductList">
+    <Drawer.Navigator
+      initialRouteName="ProductList"
+      drawerContent={props => <CustomSidebarMenu {...props} />}>
       <Drawer.Screen
         name="ProductList"
         component={ProductList}
@@ -25,7 +28,6 @@ export default function Products() {
       <Drawer.Screen name="Edit Profile" component={EditProfile} />
       <Drawer.Screen name="Change Password" component={ChangePassword} />
       <Drawer.Screen name="Logout" component={Logout} />
-      <Drawer.Screen name="EditProfileScreen" component={EditProfile} />
     </Drawer.Navigator>
   );
 }
