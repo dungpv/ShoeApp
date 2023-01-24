@@ -8,11 +8,16 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {ICONS, KEY_SCREENS} from '../../common/Constant';
 import {useDispatch, useSelector} from 'react-redux';
-import {getProduct} from '../../redux/products/productlist/ProductListThunk';
+import {
+  getAllCategory,
+  getProduct,
+  getProductByCategoryId,
+} from '../../redux/products/productlist/ProductListThunk';
 import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
 import {useNavigation} from '@react-navigation/native';
 import {theme} from '../../common/Theme';
@@ -20,8 +25,11 @@ import CustomShoeSize from '../../components/CustomShoeSize';
 import {addCartItem} from '../../redux/users/cart/ShoppingCartSlice';
 import CustomShoeColor from '../../components/CustomShoeColor';
 import Toast from 'react-native-toast-message';
+import {setCategorySelected} from '../../redux/products/productlist/ProductListSlice';
+import {memo} from 'react';
+import Category from '../../components/Category';
 
-export default function ProductList() {
+function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const [favoriteList, setFavoriteList] = useState([]);
   const colors = [
@@ -30,15 +38,24 @@ export default function ProductList() {
     theme.colors.red,
     theme.colors.darkgray,
   ];
-  const sizes = [36, 37, 38, 39, 40, 41, 42];
+
+  const CustomShoeSizeMemo = memo(CustomShoeSize);
+
+  const categoryData = useSelector(
+    state => state.productListReducer.categoryData,
+  );
 
   const productData = useSelector(
     state => state.productListReducer.productData,
   );
+
+  const isLoading = useSelector(state => state.productListReducer.isLoading);
+
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   useEffect(() => {
+    dispatch(getAllCategory());
     dispatch(getProduct());
   }, []);
 
@@ -78,9 +95,6 @@ export default function ProductList() {
   };
 
   const renderItem = ({item}) => {
-    const size =
-      item.size.length > 0 ? item.size.replace('[', '').replace(']', '') : '';
-    const customSize = size != '' ? size.split(',').map(Number) : sizes;
     return (
       <View style={styles.containerItem} key={item.id}>
         <View style={styles.avatarImage}>
@@ -103,7 +117,7 @@ export default function ProductList() {
             <Text style={styles.textImagePrice}>$ {item.price}</Text>
           </TouchableOpacity>
           <CustomShoeColor colors={colors} />
-          <CustomShoeSize dataSize={customSize}></CustomShoeSize>
+          <CustomShoeSizeMemo />
           <View
             style={{
               flexDirection: 'row',
@@ -151,7 +165,11 @@ export default function ProductList() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Category dataCategories={categoryData}></Category>
       <View style={styles.mainWrapperView}>
+        {isLoading && (
+          <ActivityIndicator size="large" color={theme.colors.loading} />
+        )}
         <FlatList
           data={productData}
           renderItem={renderItem}
@@ -218,3 +236,5 @@ const styles = StyleSheet.create({
     height: 28,
   },
 });
+
+export default ProductList;

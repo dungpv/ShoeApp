@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SIZES, theme} from '../common/Theme';
 
-export default function CustomShoeSize({dataSize}) {
+export default function CustomShoeSize() {
   const [currentShoeSize, setCurrentShoeSize] = useState('');
+  const sizes = ['36', '37', '38', '39', '40', '41', '42'];
 
   const renderProductSizes = ({item}) => {
     return (
@@ -35,7 +36,7 @@ export default function CustomShoeSize({dataSize}) {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={dataSize}
+        data={sizes}
         renderItem={data => {
           return renderProductSizes(data);
         }}
