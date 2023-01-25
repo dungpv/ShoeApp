@@ -44,14 +44,24 @@ export default function AddToCart({
   };
 
   const handleAddToCart = cartItem => {
-    dispatch(addCartList(cartItem));
-    Toast.show({
-      position: 'top',
-      topOffset: 60,
-      type: 'success',
-      text1: 'Item Added To Cart',
-      visibilityTime: 1500,
-    });
+    if (!cartItem.size || !cartItem.color) {
+      Toast.show({
+        position: 'top',
+        topOffset: 60,
+        type: 'error',
+        text1: 'Please choose size/color',
+        visibilityTime: 1500,
+      });
+    } else {
+      dispatch(addCartList(cartItem));
+      Toast.show({
+        position: 'top',
+        topOffset: 60,
+        type: 'success',
+        text1: 'Item Added To Cart',
+        visibilityTime: 1500,
+      });
+    }
   };
 
   return (

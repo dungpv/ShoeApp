@@ -43,8 +43,13 @@ export default function CartDetail({cartData}) {
               <Image style={styles.icon24} source={ICONS.iconAddFavorite} />
             </TouchableOpacity>
           </View>
-          <View style={styles.cartDetail__item_size}>
+          <View style={styles.cartDetail__item_sizeColor}>
             <Text style={styles.text}>{item.size}</Text>
+            <Text
+              style={[
+                {backgroundColor: item.color},
+                styles.cartDetail__item_sizeColor_color,
+              ]}></Text>
           </View>
           <View style={styles.rowDisplay}>
             <Text style={[styles.text, {fontSize: SIZES.fontSize16}]}>
@@ -58,7 +63,7 @@ export default function CartDetail({cartData}) {
                 <Text style={styles.text}>-</Text>
               </TouchableOpacity>
               <TouchableOpacity>
-                <Text>1</Text>
+                <Text>{item.quantity}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {

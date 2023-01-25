@@ -55,15 +55,22 @@ export const styles = StyleSheet.create({
     color: theme.colors.primary,
     fontWeight: SIZES.fontWeight,
   },
-  cartDetail__item_size: {
+  cartDetail__item_sizeColor: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
     padding: SIZES.padding / 2,
-    width: 50,
+    width: '40%',
     backgroundColor: theme.colors.lightGray,
     borderWidth: 1,
     borderColor: theme.colors.primary,
     marginTop: SIZES.margin8,
     marginBottom: SIZES.margin16 * 3,
     borderRadius: 40,
+  },
+  cartDetail__item_sizeColor_color: {
+    height: 20,
+    width: 20,
   },
   text: {
     textAlign: 'center',
