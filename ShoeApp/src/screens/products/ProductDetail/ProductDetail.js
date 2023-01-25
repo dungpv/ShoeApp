@@ -13,6 +13,7 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState('');
 
   const data = useSelector(state => state.productDetailReducer.productDetail);
+  const {cart} = useSelector(state => state.shoppingCartReducer);
 
   const colors = [
     theme.colors.black,
@@ -30,7 +31,7 @@ export default function ProductDetail() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <NavBar />
+      <NavBar cartTotal={cart} />
       <ProductInfo
         data={data}
         colors={colors}

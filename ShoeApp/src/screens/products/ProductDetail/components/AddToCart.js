@@ -1,9 +1,11 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 import {useDispatch, useSelector} from 'react-redux';
 import {ICONS} from '../../../../common/Constant';
 import {theme} from '../../../../common/Theme';
-import {addCartItem} from '../../../../redux/users/cart/ShoppingCartSlice';
+import {addCartList} from '../../../../redux/users/cart/ShoppingCartSlice';
 import {updatedFavoriteList} from '../../../../redux/users/favorite/FavoriteProductSlice';
 import {styles} from '../styles/Styles';
 
@@ -13,13 +15,11 @@ export default function AddToCart({
   currentShoeSize,
 }) {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const favoriteList = useSelector(
     state => state.favoriteProductReducer.favoriteList,
   );
-
-  const cartItem = useSelector(state => state.shoppingCartReducer.cartItem);
-  console.log('cart item', cartItem);
 
   const favoriteListId = favoriteList.map(product => product.id);
 
@@ -44,8 +44,14 @@ export default function AddToCart({
   };
 
   const handleAddToCart = cartItem => {
-    dispatch(addCartItem(cartItem));
-    alert('Successfully added item to cart!');
+    dispatch(addCartList(cartItem));
+    Toast.show({
+      position: 'top',
+      topOffset: 60,
+      type: 'success',
+      text1: 'Item Added To Cart',
+      visibilityTime: 1500,
+    });
   };
 
   return (
