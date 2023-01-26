@@ -1,14 +1,11 @@
-import {View, Text} from 'react-native';
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import ProductList from './ProductList';
-import ProductDetail from './ProductDetail/ProductDetail';
-import EditProfile from '../users/EditProfile';
-import Header from '../../components/Header';
-import Logout from '../users/Logout';
-import ChangePassword from '../users/ChangePassword';
+import React from 'react';
 import CustomSidebarMenu from '../../components/CustomSidebarMenu';
+import Header from '../../components/Header';
+import ChangePassword from '../users/ChangePassword';
+import EditProfile from '../users/EditProfile';
+import Logout from '../users/Logout';
+import ProductList from './ProductList';
 
 const Drawer = createDrawerNavigator();
 

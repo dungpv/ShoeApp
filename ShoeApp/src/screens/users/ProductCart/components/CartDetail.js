@@ -1,10 +1,17 @@
-import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {ICONS} from '../../../../common/Constant';
 import {SIZES, theme} from '../../../../common/Theme';
+import {
+  decreaseItemQty,
+  increaseItemQty,
+} from '../../../../redux/users/cart/ShoppingCartSlice';
 import {styles} from '../styles/Styles';
 
 export default function CartDetail({cartData}) {
+  const dispatch = useDispatch();
+
   const renderCartProducts = ({item}) => {
     return (
       <TouchableOpacity
@@ -34,6 +41,7 @@ export default function CartDetail({cartData}) {
               {item.name.length > 20
                 ? `${item.name.substring(0, 20)}...`
                 : item.name}
+              {/* {item.name} */}
             </Text>
 
             <TouchableOpacity
@@ -58,16 +66,16 @@ export default function CartDetail({cartData}) {
             <View style={[styles.rowDisplay, styles.cartDetail__item_btn]}>
               <TouchableOpacity
                 onPress={() => {
-                  console.log('Clicking decrease qty');
+                  dispatch(decreaseItemQty(item.cartId));
                 }}>
                 <Text style={styles.text}>-</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => {}}>
                 <Text>{item.quantity}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  console.log('Clicking increase qty');
+                  dispatch(increaseItemQty(item.cartId));
                 }}>
                 <Text style={styles.text}>+</Text>
               </TouchableOpacity>

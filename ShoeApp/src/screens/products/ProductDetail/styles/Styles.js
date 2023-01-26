@@ -17,6 +17,11 @@ export const styles = StyleSheet.create({
     top: -10,
     left: 10,
   },
+
+  iconsRight: {
+    position: 'absolute',
+    right: 10,
+  },
   icon24: {
     width: 24,
     height: 24,
@@ -26,9 +31,10 @@ export const styles = StyleSheet.create({
     height: 50,
   },
   navBar__title: {
-    fontSize: SIZES.fontSize16,
+    fontSize: SIZES.fontSize24,
     fontWeight: SIZES.fontWeight,
     textAlign: 'center',
+    letterSpacing: 1,
   },
   productInfo__container: {
     alignItems: 'center',

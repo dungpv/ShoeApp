@@ -84,6 +84,7 @@ export default function AddToCart({
           onPress={() => {
             const productCartItem = {
               cartId: `${productDetail.id}${selectedColor}${currentShoeSize}`,
+              productId: productDetail.id,
               name: productDetail.name,
               image: productDetail.image,
               size: currentShoeSize,

@@ -20,29 +20,27 @@ export default function NavBar({cartTotal}) {
   return (
     <View style={styles.navBar}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Image style={styles.icon24} source={ICONS.iconClose} />
+        <Image
+          style={styles.icon24}
+          source={ICONS.iconClose}
+          resizeMode="contain"
+        />
       </TouchableOpacity>
-      <View style={{width: 300}}>
+      <View style={{width: '100%'}}>
         <Text style={styles.navBar__title}>{categorySelected}</Text>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <View style={{position: 'relative'}}>
-          <Text style={styles.navBar__cartTotal}>{renderTotalCartItem()}</Text>
-          <TouchableOpacity
-            onPress={() => navigation.push(KEY_SCREENS.productCart)}>
-            <Image style={styles.icon24} source={ICONS.iconShoppingCart} />
-          </TouchableOpacity>
-        </View>
 
-        <TouchableOpacity>
-          <Image style={styles.icon24} source={ICONS.iconMore} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        onPress={() => navigation.push(KEY_SCREENS.productCart)}
+        style={styles.iconsRight}>
+        <Text style={styles.navBar__cartTotal}>{renderTotalCartItem()}</Text>
+
+        <Image
+          style={styles.icon24}
+          source={ICONS.iconShoppingCart}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
     </View>
   );
 }

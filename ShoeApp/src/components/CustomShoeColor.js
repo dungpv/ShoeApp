@@ -2,8 +2,11 @@ import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {SIZES, theme} from '../common/Theme';
 
-export default function CustomShoeColor({colors}) {
-  const [selectedColor, setSelectedColor] = useState('');
+export default function CustomShoeColor({
+  colors,
+  currentColor,
+  onChangeSelectedColor,
+}) {
   const renderProductColor = ({item}) => {
     return (
       <TouchableOpacity
@@ -11,11 +14,9 @@ export default function CustomShoeColor({colors}) {
         style={[
           styles.productInfo__btnColor,
           {backgroundColor: item},
-          item === selectedColor ? styles.productInfo__btnColor_selected : '',
+          item === currentColor ? styles.productInfo__btnColor_selected : '',
         ]}
-        onPress={() => {
-          setSelectedColor(item);
-        }}></TouchableOpacity>
+        onPress={() => onChangeSelectedColor(item)}></TouchableOpacity>
     );
   };
   return (

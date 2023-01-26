@@ -1,11 +1,22 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
+import {useSelector} from 'react-redux';
 import {ICONS, KEY_SCREENS} from '../common/Constant';
 
-const Header = ({navigation, title}) => {
+const Header = ({navigation, title, icon}) => {
+  const {cart} = useSelector(state => state.shoppingCartReducer);
+
   const openMenu = () => {
     navigation.openDrawer();
   };
+
+  const renderTotalCartItem = () => {
+    return cart.reduce(
+      (totalCartItem, cartItem, index) => (totalCartItem += cartItem.quantity),
+      0,
+    );
+  };
+
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={openMenu} style={styles.iconsLeft}>
@@ -18,9 +29,12 @@ const Header = ({navigation, title}) => {
       <View style={styles.headerTitle}>
         <Text style={styles.headerText}>{title}</Text>
       </View>
+
       <TouchableOpacity
         onPress={() => navigation.push(KEY_SCREENS.productCart)}
         style={styles.iconsRight}>
+        <Text style={styles.header__cartTotal}>{renderTotalCartItem()}</Text>
+
         <Image
           style={styles.icon}
           source={ICONS.iconShoppingCart}
@@ -37,19 +51,18 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 60,
     flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   headerTitle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
+    width: '100%',
   },
   headerText: {
     fontWeight: 'bold',
     fontSize: 20,
     color: '#333',
     letterSpacing: 1,
+    textAlign: 'center',
   },
   iconsLeft: {
     position: 'absolute',
@@ -58,12 +71,18 @@ const styles = StyleSheet.create({
   },
   iconsRight: {
     position: 'absolute',
-    right: 20,
+    right: 10,
     top: 15,
   },
   icon: {
     width: 28,
     height: 28,
+  },
+  header__cartTotal: {
+    color: 'red',
+    position: 'absolute',
+    top: -10,
+    left: 10,
   },
 });
 

@@ -28,6 +28,9 @@ import {addCartList} from '../../redux/users/cart/ShoppingCartSlice';
 function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const [favoriteList, setFavoriteList] = useState([]);
+  const [selectedColor, setSelectedColor] = useState('');
+  const [currentShoeSize, setCurrentShoeSize] = useState('');
+
   const colors = [
     theme.colors.black,
     theme.colors.white1,
@@ -80,14 +83,32 @@ function ProductList() {
   };
 
   const handleAddToCart = cartItem => {
-    dispatch(addCartList(cartItem));
-    Toast.show({
-      position: 'top',
-      topOffset: 60,
-      type: 'success',
-      text1: `Successfully added item ${cartItem.name} to cart!`,
-      visibilityTime: 1500,
-    });
+    if (!cartItem.size || !cartItem.color) {
+      Toast.show({
+        position: 'top',
+        topOffset: 60,
+        type: 'error',
+        text1: 'Please choose size/color',
+        visibilityTime: 1500,
+      });
+    } else {
+      dispatch(addCartList(cartItem));
+      Toast.show({
+        position: 'top',
+        topOffset: 60,
+        type: 'success',
+        text1: 'Item Added To Cart',
+        visibilityTime: 1500,
+      });
+    }
+  };
+
+  const handleChangeSelectedColor = color => {
+    setSelectedColor(color);
+  };
+
+  const handleChangeShoeSize = size => {
+    setCurrentShoeSize(size);
   };
 
   const renderItem = ({item}) => {
@@ -112,8 +133,15 @@ function ProductList() {
             <Text style={styles.textImageName}>{item.name}</Text>
             <Text style={styles.textImagePrice}>$ {item.price}</Text>
           </TouchableOpacity>
-          <CustomShoeColor colors={colors} />
-          <CustomShoeSizeMemo />
+          <CustomShoeColor
+            colors={colors}
+            currentColor={selectedColor}
+            onChangeSelectedColor={handleChangeSelectedColor}
+          />
+          <CustomShoeSizeMemo
+            selectedShoeSize={currentShoeSize}
+            onChangeShoeSize={handleChangeShoeSize}
+          />
           <View
             style={{
               flexDirection: 'row',
@@ -128,9 +156,11 @@ function ProductList() {
               }}
               onPress={() => {
                 const productCartItem = {
-                  cartId: `${item.id}`,
+                  cartId: `${item.id}${selectedColor}${currentShoeSize}`,
                   name: item.name,
                   image: item.image,
+                  color: selectedColor,
+                  size: currentShoeSize,
                   price: item.price,
                   quantity: 1,
                 };
