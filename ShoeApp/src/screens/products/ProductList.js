@@ -28,10 +28,11 @@ import Toast from 'react-native-toast-message';
 import {setCategorySelected} from '../../redux/products/productlist/ProductListSlice';
 import {memo} from 'react';
 import Category from '../../components/Category';
+import Favorite from '../../components/Favorite';
 
 function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;
-  const [favoriteList, setFavoriteList] = useState([]);
+
   const colors = [
     theme.colors.black,
     theme.colors.white1,
@@ -58,22 +59,6 @@ function ProductList() {
     dispatch(getAllCategory());
     dispatch(getProduct());
   }, []);
-
-  const onFavorite = product => {
-    setFavoriteList([...favoriteList, product]);
-  };
-
-  const onRemoveFavorite = product => {
-    const filteredList = favoriteList.filter(item => item.id !== product.id);
-    setFavoriteList(filteredList);
-  };
-
-  const ifExistsFavorite = product => {
-    if (favoriteList.filter(item => item.id === product.id).length > 0) {
-      return true;
-    }
-    return false;
-  };
 
   const _actionUpdateSelectedProduct = productId => {
     dispatch(getProductDetail(productId)).then(
@@ -123,13 +108,7 @@ function ProductList() {
               flexDirection: 'row',
             }}>
             <TouchableOpacity
-              style={{
-                padding: 10,
-                backgroundColor: '#4f3ce6',
-                width: 100,
-                borderRadius: 10,
-                marginBottom: 30,
-              }}
+              style={styles.addToCart}
               onPress={() => {
                 const productCartItem = {
                   cartId: `${item.id}`,
@@ -144,19 +123,7 @@ function ProductList() {
                 Add To Card
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={{marginLeft: 10, marginTop: 5}}
-              onPress={() =>
-                ifExistsFavorite(item)
-                  ? onRemoveFavorite(item)
-                  : onFavorite(item)
-              }>
-              <Image
-                style={styles.icon}
-                source={
-                  ifExistsFavorite(item) ? ICONS.iconLove : ICONS.iconUnlike
-                }></Image>
-            </TouchableOpacity>
+            <Favorite item={item}></Favorite>
           </View>
         </View>
       </View>
@@ -234,6 +201,13 @@ const styles = StyleSheet.create({
   icon: {
     width: 28,
     height: 28,
+  },
+  addToCart: {
+    padding: 10,
+    backgroundColor: '#4f3ce6',
+    width: 100,
+    borderRadius: 10,
+    marginBottom: 30,
   },
 });
 
