@@ -32,7 +32,7 @@ export default function StartScreen() {
   }, []);
 
   const redirectScreens = token => {
-    console.log(token);
+    //console.log(token);
     setIsLoading(!isLoading);
     if (token !== '' && token !== 'null' && token !== 'undefined') {
       setTimeout(() => {

@@ -3,6 +3,7 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SIZES, theme} from '../common/Theme';
 
 export default function CustomShoeSize({selectedShoeSize, onChangeShoeSize}) {
+  const [selectSize, setSelectSize] = useState('');
   const sizes = ['36', '37', '38', '39', '40', '41', '42'];
 
   const renderProductSizes = ({item}) => {
@@ -10,16 +11,17 @@ export default function CustomShoeSize({selectedShoeSize, onChangeShoeSize}) {
       <TouchableOpacity
         style={[
           styles.productInfo__btnSize,
-          item === selectedShoeSize ? styles.productInfo__btnSize_selected : '',
+          item === selectSize ? styles.productInfo__btnSize_selected : '',
         ]}
         onPress={() => {
+          setSelectSize(item);
           onChangeShoeSize(item);
         }}>
         <View>
           <Text
             style={[
               styles.productInfo__btnSize_text,
-              item === selectedShoeSize
+              item === selectSize
                 ? styles.productInfo__btnSize_selectedText
                 : '',
             ]}>
