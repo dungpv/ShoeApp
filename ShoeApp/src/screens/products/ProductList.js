@@ -67,7 +67,7 @@ function ProductList() {
     dispatch(getProductDetail(productId)).then(
       setTimeout(() => {
         navigation.push(KEY_SCREENS.productDetail);
-      }, 1500),
+      }, 1000),
     );
   };
 
@@ -147,8 +147,6 @@ function ProductList() {
                   price: item.price,
                   quantity: 1,
                 };
-                console.log(productCartItem);
-
                 handleAddToCart(productCartItem);
               }}>
               <Text style={{color: 'white', fontWeight: '600'}}>
@@ -226,7 +224,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   textImagePrice: {
-    color: 'orange',
+    color: theme.colors.orange,
     fontSize: 16,
     fontWeight: '700',
   },

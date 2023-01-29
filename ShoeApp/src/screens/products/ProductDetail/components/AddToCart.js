@@ -58,7 +58,7 @@ export default function AddToCart({
         position: 'top',
         topOffset: 60,
         type: 'success',
-        text1: 'Item Added To Cart',
+        text1: `Item ${cartItem.name} Added To Cart`,
         visibilityTime: 1500,
       });
     }
@@ -66,7 +66,7 @@ export default function AddToCart({
 
   return (
     <View style={styles.addToCart}>
-      <View style={{backgroundColor: theme.colors.white}}>
+      <View style={{backgroundColor: theme.colors.lightGray}}>
         <TouchableOpacity
           onPress={() => handleChangeLikeStatus(productDetail.id)}>
           <Image
