@@ -61,8 +61,12 @@ export default function CartDetail({cartData}) {
               ]}></Text>
           </View>
           <View style={styles.rowDisplay}>
-            <Text style={[styles.text, {fontSize: SIZES.fontSize16}]}>
-              ${item.price}
+            <Text
+              style={[
+                styles.text,
+                {fontSize: SIZES.fontSize16, color: theme.colors.orange},
+              ]}>
+              $ {item.price}
             </Text>
             <View style={[styles.rowDisplay, styles.cartDetail__item_btn]}>
               <TouchableOpacity
@@ -122,6 +126,7 @@ export default function CartDetail({cartData}) {
       renderItem={data => renderCartProducts(data)}
       renderHiddenItem={({item}) => renderHiddenItem(item)}
       rightOpenValue={-75}
+      style={{marginTop: 20}}
     />
   );
 }

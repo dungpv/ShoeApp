@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: -10,
     left: 10,
+    fontWeight: '600',
   },
 
   iconsRight: {

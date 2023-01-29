@@ -5,6 +5,7 @@ import {ICONS} from '../../../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SIZES} from '../../../../common/Theme';
+import Toast from 'react-native-toast-message';
 
 export default function NavBar() {
   const navigation = useNavigation();
@@ -25,7 +26,15 @@ export default function NavBar() {
         }}>
         <TouchableOpacity
           style={{marginRight: SIZES.margin8}}
-          onPress={() => {}}>
+          onPress={() => {
+            Toast.show({
+              position: 'top',
+              topOffset: 60,
+              type: 'info',
+              text1: 'The function is developing',
+              visibilityTime: 1200,
+            });
+          }}>
           <Image style={styles.icon30} source={ICONS.iconLike} />
         </TouchableOpacity>
         <TouchableOpacity>

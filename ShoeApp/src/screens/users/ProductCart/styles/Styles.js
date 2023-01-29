@@ -112,6 +112,6 @@ export const styles = StyleSheet.create({
   checkout__subtotal: {
     fontSize: SIZES.fontSize16,
     fontWeight: SIZES.fontWeight,
-    color: theme.colors.red,
+    color: theme.colors.orange,
   },
 });
