@@ -6,8 +6,10 @@ import {SIZES, theme} from '../../../../common/Theme';
 import {
   decreaseItemQty,
   increaseItemQty,
+  removeCartItem,
 } from '../../../../redux/users/cart/ShoppingCartSlice';
 import {styles} from '../styles/Styles';
+import {SwipeListView} from 'react-native-swipe-list-view';
 
 export default function CartDetail({cartData}) {
   const dispatch = useDispatch();
@@ -98,13 +100,29 @@ export default function CartDetail({cartData}) {
     );
   };
 
+  const renderHiddenItem = cartItem => {
+    return (
+      <TouchableOpacity
+        style={styles.cartDetail__item_delete}
+        onPress={() => deleteCartItem(cartItem.cartId)}>
+        <Image source={ICONS.iconDelete} />
+      </TouchableOpacity>
+    );
+  };
+
+  const deleteCartItem = cartId => {
+    dispatch(removeCartItem(cartId));
+  };
+
   return (
-    <FlatList
+    <SwipeListView
       vertical
       showsVerticalScrollIndicator={false}
       data={cartData}
       ItemSeparatorComponent={ItemDivider}
       renderItem={data => renderCartProducts(data)}
+      renderHiddenItem={({item}) => renderHiddenItem(item)}
+      rightOpenValue={-75}
     />
   );
 }

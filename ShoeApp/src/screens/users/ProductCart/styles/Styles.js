@@ -83,6 +83,15 @@ export const styles = StyleSheet.create({
     borderRadius: SIZES.borderRadius,
     width: '50%',
   },
+  cartDetail__item_delete: {
+    alignSelf: 'flex-end',
+    width: 75,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+    marginVertical: 3,
+  },
   checkout: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
