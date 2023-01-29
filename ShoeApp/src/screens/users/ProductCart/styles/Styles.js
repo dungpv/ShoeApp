@@ -109,4 +109,9 @@ export const styles = StyleSheet.create({
     color: theme.colors.white,
     padding: SIZES.padding,
   },
+  checkout__subtotal: {
+    fontSize: SIZES.fontSize16,
+    fontWeight: SIZES.fontWeight,
+    color: theme.colors.red,
+  },
 });

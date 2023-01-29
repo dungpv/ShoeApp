@@ -13,7 +13,7 @@ export default function ProductCart() {
     <View style={styles.container}>
       <NavBar />
       <CartDetail cartData={cart} />
-      <CheckOut />
+      <CheckOut cartData={cart} />
     </View>
   );
 }

@@ -43,7 +43,6 @@ export default function CartDetail({cartData}) {
               {item.name.length > 20
                 ? `${item.name.substring(0, 20)}...`
                 : item.name}
-              {/* {item.name} */}
             </Text>
 
             <TouchableOpacity
