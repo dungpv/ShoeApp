@@ -15,6 +15,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import {IMAGES} from '../common/Constant';
+import {theme} from '../common/Theme';
 
 const CustomSidebarMenu = props => {
   return (
@@ -29,6 +30,23 @@ const CustomSidebarMenu = props => {
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
+      <View style={{marginBottom: 15}}>
+        <Text style={[styles.text, {color: theme.colors.primary}]}>
+          Design & Develop by
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL('https://github.com/dungpv');
+          }}>
+          <Text style={styles.text}>Phùng Việt Dũng</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL('https://github.com/camha91');
+          }}>
+          <Text style={styles.text}>Nguyễn Cẩm Hà</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -41,6 +59,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 20,
     marginBottom: 10,
+  },
+  text: {
+    textAlign: 'center',
+    fontWeight: '400',
   },
 });
 
