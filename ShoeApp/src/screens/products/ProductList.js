@@ -1,35 +1,40 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {memo, useEffect, useState} from 'react';
 import {
-  ActivityIndicator,
-  Dimensions,
-  FlatList,
+  View,
+  Text,
+  StyleSheet,
   Image,
   SafeAreaView,
-  StyleSheet,
-  Text,
+  FlatList,
+  Dimensions,
   TouchableOpacity,
-  View,
+  ActivityIndicator,
+  ScrollView,
 } from 'react-native';
-import Toast from 'react-native-toast-message';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect, useState, useCallback} from 'react';
 import {ICONS, KEY_SCREENS} from '../../common/Constant';
-import {theme} from '../../common/Theme';
-import Category from '../../components/Category';
-import CustomShoeColor from '../../components/CustomShoeColor';
-import CustomShoeSize from '../../components/CustomShoeSize';
-import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   getAllCategory,
   getProduct,
+  getProductByCategoryId,
 } from '../../redux/products/productlist/ProductListThunk';
+import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
+import {useNavigation} from '@react-navigation/native';
+import {theme} from '../../common/Theme';
+import CustomShoeSize from '../../components/CustomShoeSize';
+import {addCartItem} from '../../redux/users/cart/ShoppingCartSlice';
+import CustomShoeColor from '../../components/CustomShoeColor';
+import Toast from 'react-native-toast-message';
+import {setCategorySelected} from '../../redux/products/productlist/ProductListSlice';
+import {memo} from 'react';
+import Category from '../../components/Category';
+import Favorite from '../../components/Favorite';
 import {addCartList} from '../../redux/users/cart/ShoppingCartSlice';
 
 function ProductList() {
   const SCREEN_WIDTH = Dimensions.get('window').width;
-  const [favoriteList, setFavoriteList] = useState([]);
-  const [selectedColor, setSelectedColor] = useState('');
-  const [currentShoeSize, setCurrentShoeSize] = useState('');
+  const [currentColor, setCurrentColor] = useState('');
+  const [currentSize, setCurrentSize] = useState('');
 
   const colors = [
     theme.colors.black,
@@ -38,7 +43,7 @@ function ProductList() {
     theme.colors.darkgray,
   ];
 
-  const CustomShoeSizeMemo = memo(CustomShoeSize);
+  //const CustomShoeSizeMemo = memo(CustomShoeSize);
 
   const categoryData = useSelector(
     state => state.productListReducer.categoryData,
@@ -57,22 +62,6 @@ function ProductList() {
     dispatch(getAllCategory());
     dispatch(getProduct());
   }, []);
-
-  const onFavorite = product => {
-    setFavoriteList([...favoriteList, product]);
-  };
-
-  const onRemoveFavorite = product => {
-    const filteredList = favoriteList.filter(item => item.id !== product.id);
-    setFavoriteList(filteredList);
-  };
-
-  const ifExistsFavorite = product => {
-    if (favoriteList.filter(item => item.id === product.id).length > 0) {
-      return true;
-    }
-    return false;
-  };
 
   const _actionUpdateSelectedProduct = productId => {
     dispatch(getProductDetail(productId)).then(
@@ -104,11 +93,11 @@ function ProductList() {
   };
 
   const handleChangeSelectedColor = color => {
-    setSelectedColor(color);
+    setCurrentColor(color);
   };
 
   const handleChangeShoeSize = size => {
-    setCurrentShoeSize(size);
+    setCurrentSize(size);
   };
 
   const renderItem = ({item}) => {
@@ -135,11 +124,11 @@ function ProductList() {
           </TouchableOpacity>
           <CustomShoeColor
             colors={colors}
-            currentColor={selectedColor}
+            currentColor={currentColor}
             onChangeSelectedColor={handleChangeSelectedColor}
           />
-          <CustomShoeSizeMemo
-            selectedShoeSize={currentShoeSize}
+          <CustomShoeSize
+            selectedShoeSize={currentSize}
             onChangeShoeSize={handleChangeShoeSize}
           />
           <View
@@ -147,42 +136,26 @@ function ProductList() {
               flexDirection: 'row',
             }}>
             <TouchableOpacity
-              style={{
-                padding: 10,
-                backgroundColor: '#4f3ce6',
-                width: 100,
-                borderRadius: 10,
-                marginBottom: 30,
-              }}
+              style={styles.addToCart}
               onPress={() => {
                 const productCartItem = {
-                  cartId: `${item.id}${selectedColor}${currentShoeSize}`,
+                  cartId: `${item.id}${currentColor}${currentSize}`,
                   name: item.name,
                   image: item.image,
-                  color: selectedColor,
-                  size: currentShoeSize,
+                  color: currentColor,
+                  size: currentSize,
                   price: item.price,
                   quantity: 1,
                 };
+                console.log(productCartItem);
+
                 handleAddToCart(productCartItem);
               }}>
               <Text style={{color: 'white', fontWeight: '600'}}>
                 Add To Card
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={{marginLeft: 10, marginTop: 5}}
-              onPress={() =>
-                ifExistsFavorite(item)
-                  ? onRemoveFavorite(item)
-                  : onFavorite(item)
-              }>
-              <Image
-                style={styles.icon}
-                source={
-                  ifExistsFavorite(item) ? ICONS.iconLove : ICONS.iconUnlike
-                }></Image>
-            </TouchableOpacity>
+            <Favorite item={item}></Favorite>
           </View>
         </View>
       </View>
@@ -260,6 +233,13 @@ const styles = StyleSheet.create({
   icon: {
     width: 28,
     height: 28,
+  },
+  addToCart: {
+    padding: 10,
+    backgroundColor: '#4f3ce6',
+    width: 100,
+    borderRadius: 10,
+    marginBottom: 30,
   },
 });
 

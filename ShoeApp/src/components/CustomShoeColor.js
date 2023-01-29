@@ -7,6 +7,7 @@ export default function CustomShoeColor({
   currentColor,
   onChangeSelectedColor,
 }) {
+  const [selectedColor, setSelectedColor] = useState('');
   const renderProductColor = ({item}) => {
     return (
       <TouchableOpacity
@@ -14,9 +15,12 @@ export default function CustomShoeColor({
         style={[
           styles.productInfo__btnColor,
           {backgroundColor: item},
-          item === currentColor ? styles.productInfo__btnColor_selected : '',
+          item === selectedColor ? styles.productInfo__btnColor_selected : '',
         ]}
-        onPress={() => onChangeSelectedColor(item)}></TouchableOpacity>
+        onPress={() => {
+          setSelectedColor(item);
+          onChangeSelectedColor(item);
+        }}></TouchableOpacity>
     );
   };
   return (
