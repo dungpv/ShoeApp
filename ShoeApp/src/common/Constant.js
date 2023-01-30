@@ -1,9 +1,11 @@
 export const KEY_STORAGE = {
   token: 'token',
+  email: 'email',
   category: 'category',
   product: 'product',
   userLike: 'userLike',
   userUnlike: 'userUnlike',
+  myCart: 'myCart',
 };
 
 export const KEY_SCREENS = {

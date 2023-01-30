@@ -1,34 +1,29 @@
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
   Image,
   SafeAreaView,
-  FlatList,
-  Dimensions,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  ActivityIndicator,
-  ScrollView,
+  View,
 } from 'react-native';
-import React, {useEffect, useState, useCallback} from 'react';
-import {ICONS, KEY_SCREENS} from '../../common/Constant';
+import Toast from 'react-native-toast-message';
 import {useDispatch, useSelector} from 'react-redux';
+import {KEY_SCREENS} from '../../common/Constant';
+import {theme} from '../../common/Theme';
+import Category from '../../components/Category';
+import CustomShoeColor from '../../components/CustomShoeColor';
+import CustomShoeSize from '../../components/CustomShoeSize';
+import Favorite from '../../components/Favorite';
+import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
 import {
   getAllCategory,
   getProduct,
-  getProductByCategoryId,
 } from '../../redux/products/productlist/ProductListThunk';
-import {getProductDetail} from '../../redux/products/productDetail/ProductDetailThunk';
-import {useNavigation} from '@react-navigation/native';
-import {theme} from '../../common/Theme';
-import CustomShoeSize from '../../components/CustomShoeSize';
-import {addCartItem} from '../../redux/users/cart/ShoppingCartSlice';
-import CustomShoeColor from '../../components/CustomShoeColor';
-import Toast from 'react-native-toast-message';
-import {setCategorySelected} from '../../redux/products/productlist/ProductListSlice';
-import {memo} from 'react';
-import Category from '../../components/Category';
-import Favorite from '../../components/Favorite';
 import {addCartList} from '../../redux/users/cart/ShoppingCartSlice';
 
 function ProductList() {
@@ -147,7 +142,6 @@ function ProductList() {
                   price: item.price,
                   quantity: 1,
                 };
-                console.log(productCartItem);
 
                 handleAddToCart(productCartItem);
               }}>

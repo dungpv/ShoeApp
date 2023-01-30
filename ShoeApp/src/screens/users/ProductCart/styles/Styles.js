@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
     marginRight: SIZES.margin8,
   },
   checkout__btn: {
-    width: 100,
+    width: '50%',
     height: 40,
     backgroundColor: theme.colors.primary,
     marginLeft: SIZES.margin8,

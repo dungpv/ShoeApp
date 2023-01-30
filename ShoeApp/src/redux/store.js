@@ -1,12 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
+import productDetailReducer from './products/productDetail/ProductDetailSlice';
+import productListReducer from './products/productlist/ProductListSlice';
+import shoppingCartReducer from './users/cart/ShoppingCartSlice';
+import changePasswordReducer from './users/changepassword/ChangePasswordSlice';
+import editProfileReducer from './users/editprofile/EditProfileSlice';
+import favoriteProductReducer from './users/favorite/FavoriteProductSlice';
 import loginReducer from './users/login/LoginSlice';
 import signUpReducer from './users/signup/SignUpSlice';
-import editProfileReducer from './users/editprofile/EditProfileSlice';
-import changePasswordReducer from './users/changepassword/ChangePasswordSlice';
-import productListReducer from './products/productlist/ProductListSlice';
-import productDetailReducer from './products/productDetail/ProductDetailSlice';
-import favoriteProductReducer from './users/favorite/FavoriteProductSlice';
-import shoppingCartReducer from './users/cart/ShoppingCartSlice';
 
 export const store = configureStore({
   reducer: {

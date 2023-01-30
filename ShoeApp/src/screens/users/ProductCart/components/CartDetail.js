@@ -1,5 +1,6 @@
 import React from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {SwipeListView} from 'react-native-swipe-list-view';
 import {useDispatch} from 'react-redux';
 import {ICONS} from '../../../../common/Constant';
 import {SIZES, theme} from '../../../../common/Theme';
@@ -9,7 +10,6 @@ import {
   removeCartItem,
 } from '../../../../redux/users/cart/ShoppingCartSlice';
 import {styles} from '../styles/Styles';
-import {SwipeListView} from 'react-native-swipe-list-view';
 
 export default function CartDetail({cartData}) {
   const dispatch = useDispatch();

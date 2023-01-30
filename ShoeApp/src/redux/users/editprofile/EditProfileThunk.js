@@ -7,6 +7,7 @@ export const editProfile = createAsyncThunk(
   'users/updateProfile',
   async params => {
     const token = await getDataLocalStorageByKey('token');
+    console.log('token', token);
     const resp = await axios.post(API_URL + 'Users/updateProfile', params, {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',

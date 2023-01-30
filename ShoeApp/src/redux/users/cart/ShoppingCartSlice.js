@@ -1,8 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Toast} from 'react-native-toast-message/lib/src/Toast';
+import {getCheckout} from './ShoppingCartThunk';
 
 const initialState = {
   cart: [],
+  isLoading: false,
+  orderStatus: 0,
 };
 
 const shoppingCartSlice = createSlice({
@@ -69,10 +72,33 @@ const shoppingCartSlice = createSlice({
 
       state.cart = updateCart;
     },
+    resetCart: (state, action) => {
+      state.cart = [];
+      state.orderStatus = 0;
+    },
+    resetOrderStatus: (state, action) => {
+      state.orderStatus = 0;
+    },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(getCheckout.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getCheckout.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.orderStatus = action.payload;
+      });
   },
 });
 
-export const {addCartList, increaseItemQty, decreaseItemQty, removeCartItem} =
-  shoppingCartSlice.actions;
+export const {
+  addCartList,
+  increaseItemQty,
+  decreaseItemQty,
+  removeCartItem,
+  resetCart,
+  resetOrderStatus,
+} = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;
