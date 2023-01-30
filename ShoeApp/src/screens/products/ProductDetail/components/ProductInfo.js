@@ -26,9 +26,8 @@ export default function ProductInfo({
           <Text style={styles.productInfo__name}>{data.name}</Text>
           <View style={styles.productInfo__priceColor}>
             <Text style={styles.productInfo__priceColor_price}>
-              ${data.price}
+              $ {data.price}
             </Text>
-
             <ShoeColor
               colors={colors}
               colorSelected={selectedColor}
@@ -36,9 +35,17 @@ export default function ProductInfo({
             />
           </View>
           <Text style={styles.productInfo__description}>
-            {data.shortDescription}
+            {data.shortDescription
+              .replace('\n', '')
+              .replace('\r', '')
+              .replace('\r\n', '')}
           </Text>
-          <Text style={{marginBottom: SIZES.padding}}>{data.description}</Text>
+          <Text style={{marginBottom: SIZES.padding}}>
+            {data.description
+              .replace('\n', '')
+              .replace('\r', '')
+              .replace('\r\n', '')}
+          </Text>
           <ShoesSize
             dataSize={data.size}
             shoeSizeSelected={currentShoeSize}

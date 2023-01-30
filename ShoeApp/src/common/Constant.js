@@ -39,6 +39,8 @@ export const ICONS = {
   iconColor: require('../assets/iconColor.png'),
   iconAddFavorite: require('../assets/addFavorite.png'),
   iconDelete: require('../assets/delete.png'),
+  iconPlus: require('../assets/plus.png'),
+  iconSubtract: require('../assets/subtract.png'),
 };
 
 export const IMAGES = {

@@ -61,24 +61,41 @@ export default function CartDetail({cartData}) {
               ]}></Text>
           </View>
           <View style={styles.rowDisplay}>
-            <Text style={[styles.text, {fontSize: SIZES.fontSize16}]}>
-              ${item.price}
+            <Text
+              style={[
+                styles.text,
+                {fontSize: SIZES.fontSize16, color: theme.colors.orange},
+              ]}>
+              $ {item.price}
             </Text>
             <View style={[styles.rowDisplay, styles.cartDetail__item_btn]}>
               <TouchableOpacity
                 onPress={() => {
                   dispatch(decreaseItemQty(item.cartId));
                 }}>
-                <Text style={styles.text}>-</Text>
+                {/* <Text style={[styles.text, {fontSize: 18, fontWeight: '700'}]}>
+                  -
+                </Text> */}
+                <Image
+                  style={styles.icon16}
+                  source={ICONS.iconSubtract}
+                  resizeMode={'contain'}
+                />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => {}}>
-                <Text>{item.quantity}</Text>
+                <Text style={[styles.text, {fontSize: 16, fontWeight: '700'}]}>
+                  {item.quantity}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
                   dispatch(increaseItemQty(item.cartId));
                 }}>
-                <Text style={styles.text}>+</Text>
+                <Image
+                  style={styles.icon16}
+                  source={ICONS.iconPlus}
+                  resizeMode={'contain'}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -122,6 +139,7 @@ export default function CartDetail({cartData}) {
       renderItem={data => renderCartProducts(data)}
       renderHiddenItem={({item}) => renderHiddenItem(item)}
       rightOpenValue={-75}
+      style={{marginTop: 20}}
     />
   );
 }

@@ -62,7 +62,7 @@ function ProductList() {
     dispatch(getProductDetail(productId)).then(
       setTimeout(() => {
         navigation.push(KEY_SCREENS.productDetail);
-      }, 1500),
+      }, 1000),
     );
   };
 
@@ -142,7 +142,10 @@ function ProductList() {
                   price: item.price,
                   quantity: 1,
                 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20cda6810254daef21d2f17d7f9a24f935a511c8
                 handleAddToCart(productCartItem);
               }}>
               <Text style={{color: 'white', fontWeight: '600'}}>
@@ -220,7 +223,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   textImagePrice: {
-    color: 'orange',
+    color: theme.colors.orange,
     fontSize: 16,
     fontWeight: '700',
   },

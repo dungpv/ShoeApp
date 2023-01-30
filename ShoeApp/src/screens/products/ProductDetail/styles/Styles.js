@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: -10,
     left: 10,
+    fontWeight: '600',
   },
 
   iconsRight: {
@@ -57,6 +58,7 @@ export const styles = StyleSheet.create({
   productInfo__priceColor_price: {
     fontSize: SIZES.fontSize24,
     fontWeight: SIZES.fontWeight,
+    color: theme.colors.orange,
   },
   productInfo__colors: {
     justifyContent: 'flex-end',
@@ -113,6 +115,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     marginRight: SIZES.padding,
+    marginLeft: SIZES.padding,
+    borderRadius: 10,
   },
   addToCart__btnAdd_text: {
     fontSize: SIZES.fontSize16,

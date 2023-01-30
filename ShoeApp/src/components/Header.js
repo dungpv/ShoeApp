@@ -34,7 +34,6 @@ const Header = ({navigation, title, icon}) => {
         onPress={() => navigation.push(KEY_SCREENS.productCart)}
         style={styles.iconsRight}>
         <Text style={styles.header__cartTotal}>{renderTotalCartItem()}</Text>
-
         <Image
           style={styles.icon}
           source={ICONS.iconShoppingCart}
@@ -82,7 +81,8 @@ const styles = StyleSheet.create({
     color: 'red',
     position: 'absolute',
     top: -10,
-    left: 10,
+    left: 11,
+    fontWeight: '600',
   },
 });
 

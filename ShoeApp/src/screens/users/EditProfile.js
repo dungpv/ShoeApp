@@ -6,10 +6,11 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {theme} from '../../common/Theme';
 import styles from './styles/styles';
 import {
+  API_URL,
   ICONS,
   IMAGES,
   KEY_FIELDS_INPUT,
@@ -17,11 +18,12 @@ import {
 } from '../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 import * as Yup from 'yup';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Field, Formik} from 'formik';
 import {editProfile} from '../../redux/users/editprofile/EditProfileThunk';
 import RadioForm from 'react-native-simple-radio-button';
 import Toast from 'react-native-toast-message';
+import {getUserProfile} from '../../redux/users/profile/ProfileThunk';
 
 export default function EditProfile() {
   const navigation = useNavigation();
@@ -50,8 +52,14 @@ export default function EditProfile() {
       .min(10, 'Phone must 10 numbers')
       .max(10, 'Phone is 10 numbers'),
   });
-
+  // const userProfile = useSelector(
+  //   state => state.userProfileReducer.userProfile,
+  // );
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getUserProfile());
+  // }, []);
 
   const UpdateProfile = data => {
     dispatch(editProfile(data))
@@ -61,7 +69,7 @@ export default function EditProfile() {
           position: 'top',
           topOffset: 60,
           type: 'success',
-          text1: 'Edit Profile Up Succeeded',
+          text1: 'Edit Profile Succeeded',
           visibilityTime: 2000,
         }),
       );
