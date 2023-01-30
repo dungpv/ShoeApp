@@ -5,23 +5,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {updatedFavoriteList} from '../redux/users/favorite/FavoriteProductSlice';
 
 export default function Favorite({item}) {
-  // const [favoriteList, setFavoriteList] = useState([]);
-
-  // const onFavorite = product => {
-  //   setFavoriteList([...favoriteList, product]);
-  // };
-
-  // const onRemoveFavorite = product => {
-  //   const filteredList = favoriteList.filter(item => item.id !== product.id);
-  //   setFavoriteList(filteredList);
-  // };
-
-  // const ifExistsFavorite = product => {
-  //   if (favoriteList.filter(item => item.id === product.id).length > 0) {
-  //     return true;
-  //   }
-  //   return false;
-  // };
   const dispatch = useDispatch();
   const favoriteList = useSelector(
     state => state.favoriteProductReducer.favoriteList,
@@ -36,6 +19,7 @@ export default function Favorite({item}) {
         id,
         name: item.name,
         image: item.image,
+        price: item.price,
       };
       dispatch(updatedFavoriteList([...favoriteList, productData]));
     } else {

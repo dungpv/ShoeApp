@@ -135,6 +135,7 @@ function ProductList() {
               onPress={() => {
                 const productCartItem = {
                   cartId: `${item.id}${currentColor}${currentSize}`,
+                  productId: item.id,
                   name: item.name,
                   image: item.image,
                   color: currentColor,

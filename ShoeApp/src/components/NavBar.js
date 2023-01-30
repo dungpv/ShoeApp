@@ -1,14 +1,13 @@
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import {ICONS, KEY_SCREENS} from '../../../../common/Constant';
-import {styles} from '../styles/Styles';
+import {ICONS, KEY_SCREENS} from '../common/Constant';
+import {styles} from '../screens/products/ProductDetail/styles/Styles';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import {theme} from '../../../../common/Theme';
+import {theme} from '../common/Theme';
 
-export default function NavBar({cartTotal}) {
+export default function NavBar({cartTotal, title}) {
   const navigation = useNavigation();
-  const {categorySelected} = useSelector(state => state.productListReducer);
 
   const renderTotalCartItem = () => {
     return cartTotal.reduce(
@@ -27,7 +26,7 @@ export default function NavBar({cartTotal}) {
         />
       </TouchableOpacity>
       <View style={{width: '100%'}}>
-        <Text style={styles.navBar__title}>{categorySelected}</Text>
+        <Text style={styles.navBar__title}>{title}</Text>
       </View>
 
       <TouchableOpacity

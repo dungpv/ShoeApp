@@ -19,6 +19,7 @@ export const KEY_SCREENS = {
   productsListScreen: 'ProductListScreen',
   productDetail: 'ProductDetail',
   productCart: 'ProductCart',
+  productFavorite: 'ProductFavorite',
 };
 
 export const ExpiredTime = 8 * 60 * 60 * 1000;

@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {styles} from '../styles/Styles';
-import {ICONS} from '../../../../common/Constant';
+import {ICONS, KEY_SCREENS} from '../../../../common/Constant';
 import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SIZES} from '../../../../common/Theme';
@@ -27,13 +27,7 @@ export default function NavBar() {
         <TouchableOpacity
           style={{marginRight: SIZES.margin8}}
           onPress={() => {
-            Toast.show({
-              position: 'top',
-              topOffset: 60,
-              type: 'info',
-              text1: 'The function is developing',
-              visibilityTime: 1200,
-            });
+            navigation.push(KEY_SCREENS.productFavorite);
           }}>
           <Image style={styles.icon30} source={ICONS.iconLike} />
         </TouchableOpacity>
