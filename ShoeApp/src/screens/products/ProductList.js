@@ -142,10 +142,6 @@ function ProductList() {
                   price: item.price,
                   quantity: 1,
                 };
-<<<<<<< HEAD
-
-=======
->>>>>>> 20cda6810254daef21d2f17d7f9a24f935a511c8
                 handleAddToCart(productCartItem);
               }}>
               <Text style={{color: 'white', fontWeight: '600'}}>

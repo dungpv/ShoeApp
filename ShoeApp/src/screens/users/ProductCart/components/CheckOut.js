@@ -60,11 +60,7 @@ export default function CheckOut({cartData, email}) {
 
   return (
     <View style={styles.checkout}>
-<<<<<<< HEAD
       <Text style={styles.checkout__subtotal}>${cartSubtotal}</Text>
-=======
-      <Text style={styles.checkout__subtotal}>$ {getSubtotal()}</Text>
->>>>>>> 20cda6810254daef21d2f17d7f9a24f935a511c8
       <View style={styles.checkout__btn}>
         <TouchableOpacity
           onPress={() => {
