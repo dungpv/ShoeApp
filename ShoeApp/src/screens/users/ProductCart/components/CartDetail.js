@@ -1,36 +1,71 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {useDispatch} from 'react-redux';
-import {ICONS} from '../../../../common/Constant';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
+import {useDispatch, useSelector} from 'react-redux';
+import {ICONS, KEY_SCREENS} from '../../../../common/Constant';
 import {SIZES, theme} from '../../../../common/Theme';
+import {getProductDetail} from '../../../../redux/products/productDetail/ProductDetailThunk';
 import {
   decreaseItemQty,
   increaseItemQty,
   removeCartItem,
 } from '../../../../redux/users/cart/ShoppingCartSlice';
+import {updatedFavoriteList} from '../../../../redux/users/favorite/FavoriteProductSlice';
 import {styles} from '../styles/Styles';
 
-export default function CartDetail({cartData}) {
+export default function CartDetail({cartData, favoriteList}) {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const favoriteListId = favoriteList.map(product => product.id);
+
+  const _actionUpdateSelectedProduct = productId => {
+    dispatch(getProductDetail(productId)).then(
+      setTimeout(() => {
+        navigation.push(KEY_SCREENS.productDetail);
+      }, 1000),
+    );
+  };
+
+  const handleAddToFavoriteList = item => {
+    const isLike = favoriteListId.includes(item.productId);
+    if (!isLike) {
+      const productData = {
+        id: item.productId,
+        name: item.name,
+        image: item.image,
+        price: item.price,
+      };
+      dispatch(updatedFavoriteList([...favoriteList, productData]));
+    }
+    Toast.show({
+      position: 'top',
+      topOffset: 60,
+      type: 'success',
+      text1: 'Successfully moving product to wishlist from shopping bag',
+      visibilityTime: 1500,
+    });
+    dispatch(removeCartItem(item.cartId));
+  };
 
   const renderCartProducts = ({item}) => {
     return (
-      <TouchableOpacity
-        onPress={() => {
-          console.log('navigate to product detail');
-        }}
-        style={styles.cartDetail}>
+      <View style={styles.cartDetail}>
         <View
           style={{
             width: '40%',
             height: 100,
           }}>
-          <Image
-            style={styles.cartDetail__image}
-            source={{uri: item.image}}
-            resizeMode="contain"
-          />
+          <TouchableOpacity
+            onPress={() => _actionUpdateSelectedProduct(item.id)}>
+            <Image
+              style={styles.cartDetail__image}
+              source={{uri: item.image}}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -47,7 +82,7 @@ export default function CartDetail({cartData}) {
 
             <TouchableOpacity
               onPress={() => {
-                console.log('navigate to favorite list');
+                handleAddToFavoriteList(item);
               }}>
               <Image style={styles.icon24} source={ICONS.iconAddFavorite} />
             </TouchableOpacity>
@@ -73,20 +108,17 @@ export default function CartDetail({cartData}) {
                 onPress={() => {
                   dispatch(decreaseItemQty(item.cartId));
                 }}>
-                {/* <Text style={[styles.text, {fontSize: 18, fontWeight: '700'}]}>
-                  -
-                </Text> */}
                 <Image
                   style={styles.icon16}
                   source={ICONS.iconSubtract}
                   resizeMode={'contain'}
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {}}>
+              <View>
                 <Text style={[styles.text, {fontSize: 16, fontWeight: '700'}]}>
                   {item.quantity}
                 </Text>
-              </TouchableOpacity>
+              </View>
               <TouchableOpacity
                 onPress={() => {
                   dispatch(increaseItemQty(item.cartId));
@@ -100,7 +132,7 @@ export default function CartDetail({cartData}) {
             </View>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   };
 

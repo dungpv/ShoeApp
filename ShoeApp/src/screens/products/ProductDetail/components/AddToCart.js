@@ -30,6 +30,7 @@ export default function AddToCart({
         id,
         name: productDetail.name,
         image: productDetail.image,
+        price: productDetail.price,
       };
       dispatch(updatedFavoriteList([...favoriteList, productData]));
     } else {

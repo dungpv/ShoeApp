@@ -13,6 +13,7 @@ import EditProfile from './src/screens/users/EditProfile';
 import Login from './src/screens/users/Login';
 import Logout from './src/screens/users/Logout';
 import ProductCart from './src/screens/users/ProductCart/ProductCart';
+import ProductFavorite from './src/screens/users/ProductFavorite/ProductFavorite';
 import SignUp from './src/screens/users/SignUp';
 
 const Stack = createStackNavigator();
@@ -54,6 +55,11 @@ export default function App() {
           <Stack.Screen
             name={KEY_SCREENS.productCart}
             component={ProductCart}
+          />
+
+          <Stack.Screen
+            name={KEY_SCREENS.productFavorite}
+            component={ProductFavorite}
           />
         </Stack.Navigator>
       </NavigationContainer>

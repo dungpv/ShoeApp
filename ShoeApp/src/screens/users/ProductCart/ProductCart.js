@@ -11,17 +11,20 @@ import {styles} from './styles/Styles';
 export default function ProductCart() {
   const [myCart, setMyCart] = useState([]);
   const [myEmail, setMyEmail] = useState('');
+  const [myFavorite, setMyFavorite] = useState([]);
 
   const {cart} = useSelector(state => state.shoppingCartReducer);
+  const favoriteList = useSelector(
+    state => state.favoriteProductReducer.favoriteList,
+  );
 
   useEffect(() => {
     saveStorage(KEY_STORAGE.myCart, cart);
+    saveStorage(KEY_STORAGE.userLike, favoriteList);
     getMyOrder();
-  }, [cart]);
-
-  useEffect(() => {
     getMyEmail();
-  }, []);
+    getMyFavorite();
+  }, [cart, favoriteList]);
 
   const getMyOrder = async () => {
     const data = await getLocalStorageByKey(KEY_STORAGE.myCart);
@@ -38,10 +41,17 @@ export default function ProductCart() {
     }
   };
 
+  const getMyFavorite = async () => {
+    const data = await getLocalStorageByKey(KEY_STORAGE.userLike);
+    if (data) {
+      setMyFavorite(data);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <NavBar />
-      <CartDetail cartData={myCart} />
+      <CartDetail cartData={myCart} favoriteList={myFavorite} />
       <CheckOut cartData={myCart} email={myEmail} />
     </View>
   );
