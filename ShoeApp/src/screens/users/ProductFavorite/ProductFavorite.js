@@ -37,7 +37,7 @@ export default function ProductFavorite() {
 
   return (
     <SafeAreaView>
-      <NavBar cartTotal={myCart} title={'Wishlist'} />
+      {/* <NavBar cartTotal={myCart} title={'Wishlist'} /> */}
       <FavoriteList productData={myFavorite} />
     </SafeAreaView>
   );

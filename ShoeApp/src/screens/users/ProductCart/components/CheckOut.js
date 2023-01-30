@@ -21,7 +21,7 @@ export default function CheckOut({cartData, email}) {
         topOffset: 60,
         type: 'success',
         text1: 'Successfully Check Out!',
-        visibilityTime: 1500,
+        visibilityTime: 2500,
       });
       dispatch(resetCart());
     } else if (orderStatus !== 0) {

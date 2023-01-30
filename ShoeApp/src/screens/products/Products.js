@@ -6,6 +6,7 @@ import ChangePassword from '../users/ChangePassword';
 import EditProfile from '../users/EditProfile';
 import Logout from '../users/Logout';
 import ProductList from './ProductList';
+import ProductFavorite from '../users/ProductFavorite/ProductFavorite';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,6 +23,7 @@ export default function Products() {
           header: () => <Header title="Marketplace" navigation={navigation} />,
         })}
       />
+      <Drawer.Screen name="Product Favorite" component={ProductFavorite} />
       <Drawer.Screen name="Edit Profile" component={EditProfile} />
       <Drawer.Screen name="Change Password" component={ChangePassword} />
       <Drawer.Screen name="Logout" component={Logout} />
