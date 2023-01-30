@@ -1,27 +1,28 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  ActivityIndicator,
-} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {theme} from '../../common/Theme';
-import styles from './styles/styles';
+import {
+  ActivityIndicator,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Toast from 'react-native-toast-message';
+import {useDispatch} from 'react-redux';
+import * as Yup from 'yup';
 import {
   ICONS,
   IMAGES,
   KEY_FIELDS_INPUT,
   KEY_SCREENS,
+  KEY_STORAGE,
 } from '../../common/Constant';
-import {useNavigation} from '@react-navigation/native';
-import * as Yup from 'yup';
-import {useDispatch} from 'react-redux';
-import {Formik} from 'formik';
+import {saveStorage} from '../../common/LocalStorage';
+import {theme} from '../../common/Theme';
 import {login} from '../../redux/users/login/LoginThunk';
-import Toast from 'react-native-toast-message';
+import styles from './styles/styles';
 
 export default function Login() {
   const navigation = useNavigation();
@@ -56,11 +57,13 @@ export default function Login() {
           visibilityTime: 2000,
         }),
       )
+
       .then(
         setTimeout(() => {
           navigation.push(KEY_SCREENS.productsScreen);
         }, 1500),
       );
+    saveStorage(KEY_STORAGE.email, data.email);
   };
 
   return (

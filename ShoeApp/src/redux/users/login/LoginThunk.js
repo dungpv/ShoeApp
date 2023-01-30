@@ -15,6 +15,5 @@ export const login = createAsyncThunk('login/signin', async params => {
 
   let json = await resp.json();
   let token = json.content.accessToken;
-  //console.log(token);
-  return json.content.accessToken;
+  return token;
 });

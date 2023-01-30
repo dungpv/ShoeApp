@@ -1,21 +1,10 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-  ActivityIndicator,
-} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, Image, Text, View} from 'react-native';
+import {IMAGES, KEY_STORAGE} from '../common/Constant';
+import {getLocalStorageByKey} from '../common/LocalStorage';
 import {theme} from '../common/Theme';
 import styles from './users/styles/styles';
-import {IMAGES} from '../common/Constant';
-import {useNavigation, StackActions} from '@react-navigation/native';
-import {
-  getLocalStorageByKey,
-  removeLocalStorageByKey,
-} from '../common/LocalStorage';
 
 export default function StartScreen() {
   const navigation = useNavigation();
@@ -24,7 +13,8 @@ export default function StartScreen() {
 
   useEffect(() => {
     const getToken = async () => {
-      const token = await getLocalStorageByKey('token');
+      const token = await getLocalStorageByKey(KEY_STORAGE.token);
+
       redirectScreens(token);
     };
 
@@ -32,7 +22,6 @@ export default function StartScreen() {
   }, []);
 
   const redirectScreens = token => {
-    //console.log(token);
     setIsLoading(!isLoading);
     if (token !== '' && token !== 'null' && token !== 'undefined') {
       setTimeout(() => {
